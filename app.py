@@ -5,4 +5,4 @@ st.title("CSV File Uploader")
 
 
 data = pd.read_csv("data.csv")
-st.write("data")
+st.write(data)
