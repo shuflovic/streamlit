@@ -4,18 +4,13 @@ import matplotlib.pyplot as plt
 
 st.title("testing")
 
-# Load the data from your CSV file
 data = pd.read_csv("data.csv")
 
-# Filtered data from your original code (optional, you can remove this if you only want the chart)
-filtered_data = data[(data['country'] == 'sweden') & (data['platform'] == 'workaway')]
+filtered_data = data[(data['country'] == 'sweden') & (data['platform'] == 'booking.com')]
 st.write("Two countries only")
 st.write(filtered_data)
 
-# ----------------- PIE CHART CODE STARTS HERE -----------------
-
-# Group the data by 'location' and sum the 'nights'
-location_nights = filtered_data.groupby('location')['nights'].sum()
+location_nights = filtered_data.groupby('country')['nights'].sum()
 
 # Create the pie chart
 fig, ax = plt.subplots()
