@@ -10,7 +10,7 @@ filtered_data = data[data['country'] == 'sweden']
 st.write("Two countries only")
 st.write(filtered_data)
 
-location_nights = data.groupby('country')['nights'].sum()
+country_nights = data.groupby('country')['nights'].sum()
 
 # Create the pie chart
 fig, ax = plt.subplots()
