@@ -14,7 +14,7 @@ country_nights = data.groupby('country')['nights'].sum()
 
 # Create the pie chart
 fig, ax = plt.subplots()
-ax.pie(country_nights, labels=location_nights.index, autopct='%1.1f%%', startangle=90)
+ax.pie(country_nights, labels=country_nights.index, autopct='%1.1f%%', startangle=90)
 ax.axis('equal')  # Ensures the pie chart is a circle
 
 st.write("Nights Spent per Location:")
