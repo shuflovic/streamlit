@@ -5,10 +5,10 @@ st.title("testing")
 
 data = pd.read_csv("data.csv")
 
-sweden_data = data[data['country'] == 'sweden']
+filtered_data = data[data['country'] == 'sweden' | data['country'] == 'slovakia' ]
 
-st.write("sweden only")
-st.write(sweden_data)
+st.write("two countries only")
+st.write(filtered_data)
 
 st.write("all data")
 st.write(data)
