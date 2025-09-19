@@ -31,13 +31,13 @@ fig, ax = plt.subplots()
 ax.pie(
     top_5_combinations,
     # The labels will be a combination of location and platform
-    labels=top_5_combinations.index.map(lambda x: f"{x[0]}/{x[1]}"),
+    labels=top_5_combinations.index.map(lambda x: f"{x[0]} ({x[1]})"),
     autopct=lambda pct: nights_formatter(pct, top_5_combinations),
     pctdistance=0.7
 )
 ax.axis('equal')  # Ensures the pie chart is a circle
 
-st.write("Top 5 Location/Platform Combinations by Nights:")
+st.write("Top 5 Locations (by Nights):")
 # Use st.pyplot() to display the Matplotlib chart
 st.pyplot(fig)
 
