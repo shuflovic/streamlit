@@ -6,15 +6,15 @@ st.title("testing")
 
 data = pd.read_csv("data.csv")
 
-filtered_data = data[(data['country'] == 'sweden') & (data['platform'] == 'booking.com')]
+filtered_data = data[data['country'] == 'sweden']
 st.write("Two countries only")
 st.write(filtered_data)
 
-location_nights = filtered_data.groupby('country')['nights'].sum()
+location_nights = data.groupby('country')['nights'].sum()
 
 # Create the pie chart
 fig, ax = plt.subplots()
-ax.pie(location_nights, labels=location_nights.index, autopct='%1.1f%%', startangle=90)
+ax.pie(country_nights, labels=location_nights.index, autopct='%1.1f%%', startangle=90)
 ax.axis('equal')  # Ensures the pie chart is a circle
 
 st.write("Nights Spent per Location:")
