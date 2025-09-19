@@ -15,7 +15,7 @@ st.write(filtered_data)
 # ----------------- PIE CHART CODE STARTS HERE -----------------
 
 # Group the data by 'location' and sum the 'nights'
-location_nights = data.groupby('location')['nights'].sum()
+location_nights = filtered_data.groupby('location')['nights'].sum()
 
 # Create the pie chart
 fig, ax = plt.subplots()
