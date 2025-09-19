@@ -5,7 +5,7 @@ st.title("testing")
 
 data = pd.read_csv("data.csv")
 
-sweden_data = data[data['country'] == 'Sweden']
+sweden_data = data[data['country'] == 'sweden']
 
 st.write("sweden only")
 st.write(sweden_data)
