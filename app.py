@@ -9,6 +9,7 @@ data = pd.read_csv("data.csv")
 col1, col2 = st.columns(2)
 
 with col1:
+    st.write(data)
     st.write("Top 5 Accommodations (by Nights) Pie Chart:")
 
     location_nights = data.groupby(['location', 'platform'])['nights'].sum()
