@@ -3,9 +3,11 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 st.title("tam vonku - dashboard")
-home, about = st.tabs(["Home", "About"])
+home, about, contact = st.tabs(["Home", "About", "Contact"])
 home.write("this is home page")
 about.write("this is about me")
+about.write("here is my contact")
+
 
 data = pd.read_csv("data.csv")
 data['average'] = data['average'].astype(str).str.replace('€', '').str.replace(',', '.').astype(float)
