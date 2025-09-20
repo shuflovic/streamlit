@@ -35,7 +35,7 @@ ax.pie(
     autopct=lambda pct: nights_formatter(pct, top_5_combinations),
     pctdistance=0.7
 )
-ax.axis('equal')  # Ensures the pie chart is a circle
+ax.axis('equal') # Ensures the pie chart is a circle
 
 st.write("Top 5 Accommodations (by Nights):")
 # Use st.pyplot() to display the Matplotlib chart
