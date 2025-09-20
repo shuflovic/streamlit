@@ -42,8 +42,7 @@ with code2:
         top_accommodations_df = top_accommodations_df.sort_values('nights', ascending=False).head(5)
         top_accommodations_df.columns = ['Country', 'Accommodation', 'Platform', 'Nights']
     
-        st.dataframe(top_accommodations_df, hide_index=True)
-    
+        st.dataframe(top_accommodations_df.style.set_properties(**{'text-align': 'center'}), hide_index=True)
         st.divider()
     
 bottom_col1, bottom_col2 = st.tabs(["pie chart","table"])
@@ -81,4 +80,4 @@ with bottom_col2:
         )
         top_average_df = top_average_df.sort_values('average', ascending=False).head(5)
         top_average_df.columns = ['Country', 'Location', 'Accommodation', 'Average']
-        st.dataframe(top_average_df, hide_index=True)
+        st.dataframe(top_average_df.style.set_properties(**{'text-align': 'center'}), hide_index=True)
