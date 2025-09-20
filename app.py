@@ -42,7 +42,17 @@ with code2:
         top_accommodations_df = top_accommodations_df.sort_values('nights', ascending=False).head(5)
         top_accommodations_df.columns = ['Country', 'Accommodation', 'Platform', 'Nights']
     
-        st.dataframe(top_accommodations_df.style.set_properties(**{'text-align': 'center'}), hide_index=True)
+        #st.dataframe(top_accommodations_df.style.set_properties(**{'text-align': 'center'}), hide_index=True)
+        st.dataframe(
+        top_accommodations_df,
+        hide_index=True,
+        column_config={
+            "Country": st.column_config.TextColumn(label="Country", text_align="center"),
+            "Accommodation": st.column_config.TextColumn(label="Accommodation", text_align="center"),
+            "Platform": st.column_config.TextColumn(label="Platform", text_align="center"),
+            "Nights": st.column_config.NumberColumn(label="Nights", text_align="center")
+          }
+        )
         st.divider()
     
 bottom_col1, bottom_col2 = st.tabs(["pie chart","table"])
