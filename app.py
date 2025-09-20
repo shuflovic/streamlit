@@ -3,6 +3,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 st.title("testing")
+
+# Load the data from your CSV file
 data = pd.read_csv("data.csv")
 
 # Filtered data from your original code (optional)
@@ -60,7 +62,3 @@ top_5_countries_df.columns = ['Country', 'Nights']
 st.dataframe(top_5_countries_df)
 
 # ----------------- NEW CODE FOR COUNTRY COLUMN ENDS HERE -----------------
-
-
-#st.write("All data:")
-#st.write(data)
