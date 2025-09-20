@@ -37,11 +37,11 @@ ax.pie(
 )
 ax.axis('equal')  # Ensures the pie chart is a circle
 
-st.write("Top 5 Locations (by Nights):")
+st.write("Top 5 Accommodations (by Nights):")
 # Use st.pyplot() to display the Matplotlib chart
 st.pyplot(fig)
 
 # ----------------- PIE CHART CODE ENDS HERE -----------------
 
-st.write("All data:")
+#st.write("All data:")
 st.write(data)
