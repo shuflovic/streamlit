@@ -12,8 +12,7 @@ contact.write("here is my contact")
 with st.chat_message("user"):
     st.write("Hello 👋")
     st.line_chart(np.random.randn(30, 3))
-
-st.chat_input("Say something")          
+    st.chat_input("Say something")          
 
 
 data = pd.read_csv("data.csv")
