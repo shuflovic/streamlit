@@ -29,11 +29,11 @@ def nights_formatter(pct, allvals):
 # 4. Create the pie chart
 fig, ax = plt.subplots()
 ax.pie(
-    top_5_combinations,
-    # The labels will be a combination of location and platform
-    labels=top_5_combinations.index.map(lambda x: f"{x[0]} ({x[1]})"),
-    autopct=lambda pct: nights_formatter(pct, top_5_combinations),
-    pctdistance=0.7
+    top_5_combinations,
+    # The labels will be a combination of location and platform
+    labels=top_5_combinations.index.map(lambda x: f"{x[0]} ({x[1]})"),
+    autopct=lambda pct: nights_formatter(pct, top_5_combinations),
+    pctdistance=0.7
 )
 ax.axis('equal')  # Ensures the pie chart is a circle
 
