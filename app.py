@@ -6,7 +6,7 @@ st.title("tam vonku - dashboard")
 
 # Load data
 data = pd.read_csv("data.csv")
-
+data['average'] = data['average'].astype(str).str.replace('€', '').str.replace(',', '.').astype(float)
 col1, col2 = st.columns(2)
 
 with col1:
