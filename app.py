@@ -44,4 +44,4 @@ st.pyplot(fig)
 # ----------------- PIE CHART CODE ENDS HERE -----------------
 
 #st.write("All data:")
-st.write(data)
+#st.write(data)
