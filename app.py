@@ -27,7 +27,7 @@ with code1:
             labels=top_5_combinations.index.map(lambda x: f"{x[0]} ({x[1]})"),
             autopct=lambda pct: nights_formatter(pct, top_5_combinations.values),
             pctdistance=0.7,
-            textprops={'fontsize': 10} # FIX: Increase font size for readability
+            textprops={'fontsize': 15} # FIX: Increase font size for readability
         )
         ax.axis('equal')
         st.pyplot(fig)
