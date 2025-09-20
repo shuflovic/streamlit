@@ -2,25 +2,19 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 
-st.title("testing")
+st.title("tam vonku - dashboard")
 
-# Load the data from your CSV file
 data = pd.read_csv("data.csv")
 
-# Create two columns
 col1, col2 = st.columns(2)
 
-# ----------------- PIE CHART CODE STARTS HERE (in the first column) -----------------
 with col1:
     st.write("Top 5 Accommodations (by Nights):")
 
-    # 1. Group the data by BOTH 'location' and 'platform' and sum the 'nights'
-    location_platform_nights = data.groupby(['location', 'platform'])['nights'].sum()
+    #location_platform_nights = data.groupby(['location', 'platform'])['nights'].sum()
 
-    # 2. Sort the data in descending order and select the top 5
     top_5_combinations = location_platform_nights.sort_values(ascending=False).head(5)
 
-    # 3. Define a function to display the number of nights
     def nights_formatter(pct, allvals):
         absolute_nights = int(pct / 100. * sum(allvals))
         return f"{absolute_nights} nights"
