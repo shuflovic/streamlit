@@ -43,7 +43,7 @@ with col1:
 
 # ----------------- NEW CODE FOR COUNTRY COLUMN STARTS HERE (in the second column) -----------------
 with col2:
-    st.write("Top 5 Accommodations (by Nights):")
+    #st.write("Top 5 Accommodations (by Nights):")
 
     # 1. Group the data by 'country' and sum the 'nights'
     location_nights = data.groupby('location')['nights'].sum()
