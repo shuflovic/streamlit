@@ -11,7 +11,7 @@ col1, col2 = st.columns(2)
 with col1:
     st.write("Top 5 Accommodations (by Nights):")
 
-    #location_platform_nights = data.groupby(['location', 'platform'])['nights'].sum()
+    location_platform_nights = data.groupby(['location', 'platform'])['nights'].sum()
 
     top_5_combinations = location_platform_nights.sort_values(ascending=False).head(5)
 
