@@ -43,19 +43,19 @@ with col1:
 
 # ----------------- NEW CODE FOR COUNTRY COLUMN STARTS HERE (in the second column) -----------------
 with col2:
-    st.write("Top 5 Countries (by Nights):")
+    st.write("Top 5 Accommodations (by Nights):")
 
     # 1. Group the data by 'country' and sum the 'nights'
-    country_nights = data.groupby('country')['nights'].sum()
+    location_nights = data.groupby('locations')['nights'].sum()
 
     # 2. Sort the data in descending order and select the top 5
-    top_5_countries = country_nights.sort_values(ascending=False).head(5)
+    top_5_locations = locations_nights.sort_values(ascending=False).head(5)
 
     # 3. Convert the sorted Series to a DataFrame for display
-    top_5_countries_df = top_5_countries.reset_index()
-    top_5_countries_df.columns = ['Country', 'Nights']
+    top_5_locations_df = top_5_locations.reset_index()
+    top_5_locations_df.columns = ['Accommodation', 'Nights']
 
     # 4. Display the DataFrame
-    st.dataframe(top_5_countries_df)
+    st.dataframe(top_5_locations_df)
 
 # ----------------- NEW CODE FOR COUNTRY COLUMN ENDS HERE -----------------
