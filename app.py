@@ -24,7 +24,7 @@ top_5_combinations = location_platform_nights.sort_values(ascending=False).head(
 # 3. Define a function to display the number of nights
 def nights_formatter(pct, allvals):
     absolute_nights = int(pct / 100. * sum(allvals))
-    return f"{absolute_nights} nights"
+    return f"{absolute_nights} nights"
 
 # 4. Create the pie chart
 fig, ax = plt.subplots()
