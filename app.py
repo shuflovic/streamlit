@@ -40,11 +40,14 @@ with col1:
 
     fig2, ax2 = plt.subplots()
     ax2.pie(
-        top_5_expensive,
+        top_5_expensive.values,   # <--- FIX HERE
         labels=top_5_expensive.index.map(lambda x: f"{x[0]} ({x[1]} - {x[2]})"),
         autopct=lambda pct: price_formatter(pct, top_5_expensive.values),
         pctdistance=0.7
     )
+    ax2.axis('equal')
+    st.pyplot(fig2)
+
 
 
 
