@@ -7,13 +7,11 @@ st.title("tam vonku - dashboard")
 
 data = pd.read_csv("data.csv")
 data['average'] = data['average'].astype(str).str.replace('€', '').str.replace(',', '.').astype(float)
-    
+
+st.write("Top 5 Accommodations (by Nights):")
 code1, code2 = st.tabs(["pie chart","table"])
 with code1:
   
-        st.write("Top 5 Accommodations (by Nights):")
-    
-        # Group and sort
         location_nights = data.groupby(['location', 'platform'])['nights'].sum()
         top_5_combinations = location_nights.sort_values(ascending=False).head(5)
     
@@ -35,9 +33,6 @@ with code1:
         st.divider()
                                   
 with code2:
-        st.write("Top 5 Accommodations (by Nights) Table:")
-    
-        # Create table of top accommodations
         top_accommodations_df = (
             data.groupby(['country', 'location', 'platform'])['nights']
             .sum()
