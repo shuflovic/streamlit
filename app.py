@@ -4,7 +4,6 @@ import matplotlib.pyplot as plt
 
 st.title("tam vonku - dashboard")
 
-# Load data
 data = pd.read_csv("data.csv")
 data['average'] = data['average'].astype(str).str.replace('€', '').str.replace(',', '.').astype(float)
 col1, col2 = st.columns(2)
@@ -68,3 +67,16 @@ with col2:
     top_accommodations_df.columns = ['Country', 'Accommodation', 'Platform', 'Nights']
 
     st.dataframe(top_accommodations_df, hide_index=True)
+
+    st.divider()
+        st.write("Top 5 Accommodations (by Nights) Table:")
+
+    top_average_df = (
+        data.groupby(['country', 'location', 'accommodation'])['average']
+        .max()
+        .reset_index()
+    )
+    top_average_df = top_average_df.sort_values('average', ascending=False).head(5)
+    top_average_df.columns = ['Country', 'Location', 'Accommodation', 'Average']
+
+    st.dataframe(top_average_df, hide_index=True)
