@@ -62,7 +62,7 @@ with bottom_col1:
         fig2, ax2 = plt.subplots()
         ax2.pie(
             top_5_expensive.values,   # FIX: use values, not Series
-            labels=top_5_expensive.index.map(lambda x: f"{x[0]} ({x[1]} - {x[2]})"),
+            labels=top_5_expensive.index.map(lambda x: f"{x[0]} \n({x[1]} \n{x[2]})"),
             autopct=lambda pct: price_formatter(pct, top_5_expensive.values),
             pctdistance=0.7,
             textprops={'fontsize': 14} # FIX: Increase font size for readability
