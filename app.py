@@ -42,11 +42,10 @@ with col1:
     ax2.pie(
         top_5_expensive,
         labels=top_5_expensive.index.map(lambda x: f"{x[0]} ({x[1]} - {x[2]})"),
-        autopct=lambda pct: price_formatter(pct, top_5_expensive),
+        autopct=lambda pct: price_formatter(pct, top_5_expensive.values),
         pctdistance=0.7
     )
-    ax2.axis('equal')
-    st.pyplot(fig2)
+
 
 
 with col2:
