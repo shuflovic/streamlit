@@ -73,7 +73,7 @@ with bottom_col1:
     st.pyplot(fig2)
     
 with bottom_col2:
-    st.write("Top 5 Accommodations (by Nights) Table:")
+    st.write("Top 5 Most Expensive Accommodations (Price Per Person):")
 
     top_average_df = (
         data.groupby(['country', 'location', 'accommodation'])['average']
