@@ -46,13 +46,13 @@ with col2:
     st.write("Top 5 Accommodations (by Nights) Table:")
 
     # 1. Group by BOTH 'location' and 'platform' and sum the 'nights'
-    top_accommodations_df = data.groupby(['location', 'platform'])['nights'].sum().reset_index()
+    top_accommodations_df = data.groupby(['country', 'location', 'platform'])['nights'].sum().reset_index()
 
     # 2. Sort the data in descending order and select the top 5
     top_accommodations_df = top_accommodations_df.sort_values('nights', ascending=False).head(5)
     
     # 3. Rename columns for a cleaner display
-    top_accommodations_df.columns = ['Accommodation', 'Platform', 'Nights']
+    top_accommodations_df.columns = ['Country', 'Accommodation', 'Platform', 'Nights']
 
     # 4. Display the DataFrame
     st.dataframe(top_accommodations_df)
