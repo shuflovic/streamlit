@@ -27,9 +27,27 @@ with col1:
         pctdistance=0.7
     )
     ax.axis('equal')  # Ensures the pie chart is a circle
-
-    # Use st.pyplot() to display the Matplotlib chart
     st.pyplot(fig)
+
+    st.write("Top 5 Most Expensive Nights - Pie Chart:")
+    
+    averige_price = data.groupby(['country', 'location', 'accommodation'])['averige']
+    top_5_average_price= average_price.sort_values(ascending=False).head(5)
+
+    def price_formatter(pct, allvals):
+        average_price = (pct / 100. * sum(allvals))
+        return f"€{average_price:.2f}"
+
+    fig1, ax = plt.subplots()
+    ax.pie(
+        top_5_averige_price,
+        labels=top_5_averige_price.index.map(lambda x: f"{x[0]} ({x[1]})"),
+        autopct=lambda pct: price_formatter(pct, top_5_averige_nights),
+        pctdistance=0.7
+    )
+    ax.axis('equal')  # Ensures the pie chart is a circle
+    st.pyplot(fig1)
+
 
 with col2:
     st.write("Top 5 Accommodations (by Nights) Table:")
