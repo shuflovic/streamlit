@@ -19,7 +19,6 @@ with col1:
         absolute_nights = int(pct / 100. * sum(allvals))
         return f"{absolute_nights} nights"
 
-    # 4. Create the pie chart
     fig, ax = plt.subplots()
     ax.pie(
         top_5_combinations,
@@ -32,22 +31,13 @@ with col1:
     # Use st.pyplot() to display the Matplotlib chart
     st.pyplot(fig)
 
-# ----------------- PIE CHART CODE ENDS HERE -----------------
-
-# ----------------- NEW CODE FOR COUNTRY COLUMN STARTS HERE (in the second column) -----------------
 with col2:
     st.write("Top 5 Accommodations (by Nights) Table:")
 
-    # 1. Group by BOTH 'location' and 'platform' and sum the 'nights'
     top_accommodations_df = data.groupby(['country', 'location', 'platform'])['nights'].sum().reset_index()
 
-    # 2. Sort the data in descending order and select the top 5
     top_accommodations_df = top_accommodations_df.sort_values('nights', ascending=False).head(5)
     
-    # 3. Rename columns for a cleaner display
     top_accommodations_df.columns = ['Country', 'Accommodation', 'Platform', 'Nights']
 
-    # 4. Display the DataFrame
     st.dataframe(top_accommodations_df, hide_index=True)
-
-# ----------------- NEW CODE FOR COUNTRY COLUMN ENDS HERE -----------------
