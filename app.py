@@ -35,7 +35,6 @@ with col1:
     top_5_expensive = expensive_accommodations.sort_values(ascending=False).head(5)
 
     def price_formatter(pct, allvals):
-        # The value is the already calculated average, so we just format it
         average_price = (pct / 100. * sum(allvals))
         return f"€{average_price:.2f}"
 
