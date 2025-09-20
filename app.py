@@ -50,7 +50,7 @@ with code2:
     
         st.divider()
     
-bottom_col1, bottom_col2 = st.columns([4,6])
+bottom_col1, bottom_col2 = st.tabs(["pie chart","table"])
     
 with bottom_col1:
         st.write("Top 5 Most Expensive Accommodations (Price Per Person):")
