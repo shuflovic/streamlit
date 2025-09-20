@@ -5,16 +5,13 @@ import numpy as np
 
 st.title("tam vonku - dashboard")
 
-code1, code2 = st.tabs(["pie chart","code2"])
-
+data = pd.read_csv("data.csv")
+data['average'] = data['average'].astype(str).str.replace('€', '').str.replace(',', '.').astype(float)
+    
+code1, code2 = st.tabs(["pie chart","table"])
 with code1:
-    data = pd.read_csv("data.csv")
-    data['average'] = data['average'].astype(str).str.replace('€', '').str.replace(',', '.').astype(float)
-    
-    top_col1, top_col2 = st.columns([6,4])
-    
-    with top_col1:
-        st.write("Top 5 Accommodations (by Nights) Pie Chart:")
+  
+        st.write("Top 5 Accommodations (by Nights):")
     
         # Group and sort
         location_nights = data.groupby(['location', 'platform'])['nights'].sum()
@@ -36,7 +33,7 @@ with code1:
         ax.axis('equal')
         st.pyplot(fig)
                                   
-    with top_col2:
+with code2:
         st.write("Top 5 Accommodations (by Nights) Table:")
     
         # Create table of top accommodations
@@ -52,9 +49,9 @@ with code1:
     
     st.divider()
     
-    bottom_col1, bottom_col2 = st.columns([4,6])
+bottom_col1, bottom_col2 = st.columns([4,6])
     
-    with bottom_col1:
+with bottom_col1:
         st.write("Top 5 Most Expensive Accommodations (Price Per Person):")
     
         expensive_accommodations = data.groupby(['country', 'location', 'accommodation'])['average'].max()
@@ -76,7 +73,7 @@ with code1:
         ax2.axis('equal')
         st.pyplot(fig2)
         
-    with bottom_col2:
+with bottom_col2:
         st.write("Top 5 Most Expensive Accommodations (Price Per Person):")
     
         top_average_df = (
@@ -88,7 +85,3 @@ with code1:
         top_average_df.columns = ['Country', 'Location', 'Accommodation', 'Average']
         st.dataframe(top_average_df, hide_index=True)
 
-with code2:
-    st.write("second page")
-
-    
