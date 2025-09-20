@@ -29,7 +29,7 @@ with col1:
     ax.axis('equal')  # Ensures the pie chart is a circle
     st.pyplot(fig)
 
-   st.write("Top 5 Most Expensive Accommodations (by Average Price):")
+    st.write("Top 5 Most Expensive Accommodations (by Average Price):")
 
     expensive_accommodations = data.groupby(['country', 'location', 'platform'])['average'].max()
     top_5_expensive = expensive_accommodations.sort_values(ascending=False).head(5)
