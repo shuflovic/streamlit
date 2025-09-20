@@ -32,6 +32,7 @@ with code1:
         )
         ax.axis('equal')
         st.pyplot(fig)
+        st.divider()
                                   
 with code2:
         st.write("Top 5 Accommodations (by Nights) Table:")
@@ -47,7 +48,7 @@ with code2:
     
         st.dataframe(top_accommodations_df, hide_index=True)
     
-    st.divider()
+        st.divider()
     
 bottom_col1, bottom_col2 = st.columns([4,6])
     
