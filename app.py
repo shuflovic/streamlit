@@ -27,7 +27,7 @@ with code1:
             labels=top_5_combinations.index.map(lambda x: f"{x[0]} ({x[1]})"),
             autopct=lambda pct: nights_formatter(pct, top_5_combinations.values),
             pctdistance=0.7,
-            textprops={'fontsize': 15} # FIX: Increase font size for readability
+            textprops={'fontsize': 14} # FIX: Increase font size for readability
         )
         ax.axis('equal')
         st.pyplot(fig)
@@ -65,6 +65,7 @@ with bottom_col1:
             top_5_expensive.values,   # FIX: use values, not Series
             labels=top_5_expensive.index.map(lambda x: f"{x[0]} ({x[1]} - {x[2]})"),
             autopct=lambda pct: price_formatter(pct, top_5_expensive.values),
+            textprops={'fontsize': 14} # FIX: Increase font size for readability
             pctdistance=0.7
         )
         ax2.axis('equal')
