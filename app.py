@@ -6,9 +6,10 @@ st.title("tam vonku - dashboard")
 
 data = pd.read_csv("data.csv")
 data['average'] = data['average'].astype(str).str.replace('€', '').str.replace(',', '.').astype(float)
-col1, col2 = st.columns(2)
 
-with col1:
+top_col1, top_col2 = st.columns(2)
+
+with top_col1:
     st.write("Top 5 Accommodations (by Nights) Pie Chart:")
 
     # Group and sort
@@ -30,9 +31,24 @@ with col1:
     )
     ax.axis('equal')
     st.pyplot(fig)
-
-    st.divider()
                               
+with top_col2:
+    st.write("Top 5 Accommodations (by Nights) Table:")
+
+    # Create table of top accommodations
+    top_accommodations_df = (
+        data.groupby(['country', 'location', 'platform'])['nights']
+        .sum()
+        .reset_index()
+    )
+    top_accommodations_df = top_accommodations_df.sort_values('nights', ascending=False).head(5)
+    top_accommodations_df.columns = ['Country', 'Accommodation', 'Platform', 'Nights']
+
+    st.dataframe(top_accommodations_df, hide_index=True)
+
+bottom_col1, bottom_col2 = st.columns(2)
+
+with bottom_col1:
     st.write("Top 5 Most Expensive Accommodations (Price Per Person):")
 
     expensive_accommodations = data.groupby(['country', 'location', 'accommodation'])['average'].max()
@@ -53,23 +69,8 @@ with col1:
     )
     ax2.axis('equal')
     st.pyplot(fig2)
-
-with col2:
-    st.write("Top 5 Accommodations (by Nights) Table:")
-
-    # Create table of top accommodations
-    top_accommodations_df = (
-        data.groupby(['country', 'location', 'platform'])['nights']
-        .sum()
-        .reset_index()
-    )
-    top_accommodations_df = top_accommodations_df.sort_values('nights', ascending=False).head(5)
-    top_accommodations_df.columns = ['Country', 'Accommodation', 'Platform', 'Nights']
-
-    st.dataframe(top_accommodations_df, hide_index=True)
-
-    st.divider()
     
+with bottom_col2:
     st.write("Top 5 Accommodations (by Nights) Table:")
 
     top_average_df = (
