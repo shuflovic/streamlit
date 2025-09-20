@@ -18,7 +18,7 @@ with code1:
         # Formatter for nights
         def nights_formatter(pct, allvals):
             absolute_nights = round(pct / 100.0 * sum(allvals))
-            return f"{absolute_nights} nights"
+            return f"{absolute_nights}"
     
         # Pie chart for nights
         fig, ax = plt.subplots()
