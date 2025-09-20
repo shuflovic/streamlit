@@ -53,7 +53,7 @@ with col2:
 
     # 3. Convert the sorted Series to a DataFrame for display
     top_5_locations_df = top_5_locations.reset_index()
-    top_5_locations_df.columns = ['Accommodation', 'Nights', 'Platform']
+    top_5_locations_df.columns = ['Accommodation', 'Platform', 'Nights']
 
     # 4. Display the DataFrame
     st.dataframe(top_5_locations_df)
