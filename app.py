@@ -5,9 +5,9 @@ import numpy as np
 
 st.title("tam vonku - dashboard")
 
-tab1, tab2 = st.tabs(2)
+code1, code2 = st.tabs(["code1","code2"])
 
-with tab1:
+with code1:
     data = pd.read_csv("data.csv")
     data['average'] = data['average'].astype(str).str.replace('€', '').str.replace(',', '.').astype(float)
     
@@ -88,7 +88,7 @@ with tab1:
         top_average_df.columns = ['Country', 'Location', 'Accommodation', 'Average']
 
 
-with tab2:
+with code2:
     st.write("second page")
 
     st.dataframe(top_average_df, hide_index=True)
