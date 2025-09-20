@@ -9,11 +9,11 @@ data = pd.read_csv("data.csv")
 col1, col2 = st.columns(2)
 
 with col1:
-    st.write("Top 5 Accommodations (by Nights):")
+    st.write("Top 5 Accommodations (by Nights) Pie Chart:")
 
-    location_platform_nights = data.groupby(['location', 'platform'])['nights'].sum()
+    location_nights = data.groupby(['location'])['nights'].sum()
 
-    top_5_combinations = location_platform_nights.sort_values(ascending=False).head(5)
+    top_5_combinations = location_nights.sort_values(ascending=False).head(5)
 
     def nights_formatter(pct, allvals):
         absolute_nights = int(pct / 100. * sum(allvals))
@@ -23,7 +23,6 @@ with col1:
     fig, ax = plt.subplots()
     ax.pie(
         top_5_combinations,
-        # The labels will be a combination of location and platform
         labels=top_5_combinations.index.map(lambda x: f"{x[0]} ({x[1]})"),
         autopct=lambda pct: nights_formatter(pct, top_5_combinations),
         pctdistance=0.7
