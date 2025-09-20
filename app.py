@@ -55,6 +55,6 @@ with col2:
     top_accommodations_df.columns = ['Country', 'Accommodation', 'Platform', 'Nights']
 
     # 4. Display the DataFrame
-    st.dataframe(top_accommodations_df)
+    st.dataframe(top_accommodations_df, hide_index=True)
 
 # ----------------- NEW CODE FOR COUNTRY COLUMN ENDS HERE -----------------
