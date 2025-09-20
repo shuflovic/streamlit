@@ -4,44 +4,49 @@ import matplotlib.pyplot as plt
 
 st.title("tam vonku - dashboard")
 
+# Load data
 data = pd.read_csv("data.csv")
 
 col1, col2 = st.columns(2)
 
 with col1:
-    st.write(data)
     st.write("Top 5 Accommodations (by Nights) Pie Chart:")
 
+    # Group and sort
     location_nights = data.groupby(['location', 'platform'])['nights'].sum()
-
     top_5_combinations = location_nights.sort_values(ascending=False).head(5)
 
+    # Formatter for nights
     def nights_formatter(pct, allvals):
-        absolute_nights = int(pct / 100. * sum(allvals))
+        absolute_nights = int(pct / 100.0 * sum(allvals))
         return f"{absolute_nights} nights"
 
+    # Pie chart for nights
     fig, ax = plt.subplots()
     ax.pie(
-        top_5_combinations,
+        top_5_combinations.values,   # FIX: use values, not Series
         labels=top_5_combinations.index.map(lambda x: f"{x[0]} ({x[1]})"),
-        autopct=lambda pct: nights_formatter(pct, top_5_combinations),
+        autopct=lambda pct: nights_formatter(pct, top_5_combinations.values),
         pctdistance=0.7
     )
-    ax.axis('equal')  # Ensures the pie chart is a circle
+    ax.axis('equal')
     st.pyplot(fig)
 
     st.write("Top 5 Most Expensive Accommodations (by Average Price):")
 
+    # Group and sort
     expensive_accommodations = data.groupby(['country', 'location', 'platform'])['average'].max()
     top_5_expensive = expensive_accommodations.sort_values(ascending=False).head(5)
 
+    # Formatter for price
     def price_formatter(pct, allvals):
-        average_price = (pct / 100. * sum(allvals))
+        average_price = (pct / 100.0 * sum(allvals))
         return f"€{average_price:.2f}"
 
+    # Pie chart for prices
     fig2, ax2 = plt.subplots()
     ax2.pie(
-        top_5_expensive.values,   # <--- FIX HERE
+        top_5_expensive.values,   # FIX: use values, not Series
         labels=top_5_expensive.index.map(lambda x: f"{x[0]} ({x[1]} - {x[2]})"),
         autopct=lambda pct: price_formatter(pct, top_5_expensive.values),
         pctdistance=0.7
@@ -49,17 +54,16 @@ with col1:
     ax2.axis('equal')
     st.pyplot(fig2)
 
-
-
-
 with col2:
     st.write("Top 5 Accommodations (by Nights) Table:")
 
-    top_accommodations_df = data.groupby(['country', 'location', 'platform'])['nights'].sum().reset_index()
-
+    # Create table of top accommodations
+    top_accommodations_df = (
+        data.groupby(['country', 'location', 'platform'])['nights']
+        .sum()
+        .reset_index()
+    )
     top_accommodations_df = top_accommodations_df.sort_values('nights', ascending=False).head(5)
-    
     top_accommodations_df.columns = ['Country', 'Accommodation', 'Platform', 'Nights']
 
     st.dataframe(top_accommodations_df, hide_index=True)
-
