@@ -7,7 +7,7 @@ st.title("tam vonku - dashboard")
 data = pd.read_csv("data.csv")
 data['average'] = data['average'].astype(str).str.replace('€', '').str.replace(',', '.').astype(float)
 
-top_col1, top_col2 = st.columns([4,6])
+top_col1, top_col2 = st.columns([6,4])
 
 with top_col1:
     st.write("Top 5 Accommodations (by Nights) Pie Chart:")
@@ -48,7 +48,7 @@ with top_col2:
 
 st.divider()
 
-bottom_col1, bottom_col2 = st.columns(2)
+bottom_col1, bottom_col2 = st.columns([4,6])
 
 with bottom_col1:
     st.write("Top 5 Most Expensive Accommodations (Price Per Person):")
