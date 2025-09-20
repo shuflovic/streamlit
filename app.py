@@ -3,6 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 st.title("tam vonku - dashboard")
+st.code('for i in range(8): foo()')
 
 data = pd.read_csv("data.csv")
 data['average'] = data['average'].astype(str).str.replace('€', '').str.replace(',', '.').astype(float)
