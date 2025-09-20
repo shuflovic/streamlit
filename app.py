@@ -14,6 +14,13 @@ with st.chat_message("user"):
     st.line_chart(np.random.randn(30, 3))
     st.chat_input("Say something")          
 
+# Insert a chat message container.
+with st.chat_message("user"):
+    st.write("Hello 👋")
+    st.line_chart(np.random.randn(30, 3))
+
+# Display a chat input widget.
+    st.chat_input("Say something")          
 
 data = pd.read_csv("data.csv")
 data['average'] = data['average'].astype(str).str.replace('€', '').str.replace(',', '.').astype(float)
