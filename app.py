@@ -46,7 +46,7 @@ with top_col2:
 
     st.dataframe(top_accommodations_df, hide_index=True)
 
-st.devider()
+st.divider()
 
 bottom_col1, bottom_col2 = st.columns(2)
 
