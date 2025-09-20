@@ -5,7 +5,7 @@ import numpy as np
 
 st.title("tam vonku - dashboard")
 
-code1, code2 = st.tabs(["code1","code2"])
+code1, code2 = st.tabs(["pie chart","code2"])
 
 with code1:
     data = pd.read_csv("data.csv")
