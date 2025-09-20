@@ -9,8 +9,8 @@ data = pd.read_csv("data.csv")
 
 # Filtered data from your original code (optional)
 filtered_data = data[(data['country'] == 'sweden') & (data['platform'] == 'workaway')]
-st.write("Two countries only")
-st.write(filtered_data)
+#st.write("Two countries only")
+#st.write(filtered_data)
 
 # ----------------- PIE CHART CODE STARTS HERE -----------------
 
