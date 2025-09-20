@@ -69,7 +69,8 @@ with col2:
     st.dataframe(top_accommodations_df, hide_index=True)
 
     st.divider()
-        st.write("Top 5 Accommodations (by Nights) Table:")
+    
+    st.write("Top 5 Accommodations (by Nights) Table:")
 
     top_average_df = (
         data.groupby(['country', 'location', 'accommodation'])['average']
