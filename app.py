@@ -85,4 +85,3 @@ with bottom_col2:
         top_average_df = top_average_df.sort_values('average', ascending=False).head(5)
         top_average_df.columns = ['Country', 'Location', 'Accommodation', 'Average']
         st.dataframe(top_average_df, hide_index=True)
-
