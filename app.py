@@ -7,6 +7,13 @@ home, about, contact = st.tabs(["Home", "About", "Contact"])
 home.write("this is home page")
 about.write("this is about me")
 contact.write("here is my contact")
+# Insert a chat message container.
+>>> with st.chat_message("user"):
+>>>    st.write("Hello 👋")
+>>>    st.line_chart(np.random.randn(30, 3))
+
+# Display a chat input widget.
+>>> st.chat_input("Say something")          
 
 
 data = pd.read_csv("data.csv")
