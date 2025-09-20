@@ -32,10 +32,11 @@ with col1:
     ax.axis('equal')
     st.pyplot(fig)
 
-    st.write("Top 5 Most Expensive Accommodations (by Average Price):")
+    st.divider()
+                              
+    st.write("Top 5 Most Expensive Accommodations (Price Per Person):")
 
-    # Group and sort
-    expensive_accommodations = data.groupby(['country', 'location', 'platform'])['average'].max()
+    expensive_accommodations = data.groupby(['country', 'location', 'accommodation'])['average'].max()
     top_5_expensive = expensive_accommodations.sort_values(ascending=False).head(5)
 
     # Formatter for price
