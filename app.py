@@ -24,7 +24,7 @@ with code1:
         fig, ax = plt.subplots()
         ax.pie(
             top_5_combinations.values,   # FIX: use values, not Series
-            labels=top_5_combinations.index.map(lambda x: f"{x[0]} /n({x[1]})"),
+            labels=top_5_combinations.index.map(lambda x: f"{x[0]} \n({x[1]})"),
             autopct=lambda pct: nights_formatter(pct, top_5_combinations.values),
             pctdistance=0.7,
             textprops={'fontsize': 14} # FIX: Increase font size for readability
