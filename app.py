@@ -6,7 +6,7 @@ st.title("tam vonku - dashboard")
 
 data = pd.read_csv("data.csv")
 
-col1, col2, col3 = st.columns(3)
+col1, col2 = st.columns(2)
 
 with col1:
     st.write("Top 5 Accommodations (by Nights) Pie Chart:")
@@ -42,5 +42,3 @@ with col2:
 
     st.dataframe(top_accommodations_df, hide_index=True)
 
-with col3:
-    st.write("treti slpcek")
