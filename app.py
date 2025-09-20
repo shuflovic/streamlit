@@ -8,16 +8,6 @@ home, about, contact = st.tabs(["Home", "About", "Contact"])
 home.write("this is home page")
 about.write("this is about me")
 contact.write("here is my contact")
-       
-
-st.balloons()
-st.snow()
-st.toast('Mr Stay-Puft')
-st.error('Error message')
-st.warning('Warning message')
-st.info('Info message')
-st.success('Success message')
-st.exception(e)       
 
 data = pd.read_csv("data.csv")
 data['average'] = data['average'].astype(str).str.replace('€', '').str.replace(',', '.').astype(float)
