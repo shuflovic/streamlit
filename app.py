@@ -93,7 +93,9 @@ dataT['price per person ( EUR )'] = data['average'].astype(str).str.replace('€
 with third_col1:
     st.write("Filtered Flight Data")
     flight_data = dataT[dataT['type of transport'] == 'flight']
-    result = flight_data.groupby(['from', 'to'], sort=False)['price per person ( EUR )'].mean().reset_index()
+    summary_value = flight_data['price per person ( EUR )'].mean()
+    summary_row = pd.DataFrame([['Summary', 'All Flights', summary_value]], columns=['from', 'to', 'price per person ( EUR )'])
+    result = pd.concat([summary_row, result], ignore_index=True)
     result.index = result.index + 1
     st.dataframe(result, use_container_width=True)
   
