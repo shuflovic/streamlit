@@ -118,12 +118,11 @@ dataT = pd.read_csv("data_transport.csv")
 dataT['price per person ( EUR )'] = dataT['price per person ( EUR )'].astype(str).str.replace('€', '').str.replace(',', '.').astype(float)
 
 with third_col1:
-    st.write("Filtered Flight Data")
+    st.write("Flight Tickets")
     flight_data = dataT[dataT['type of transport'] == 'flight']
-    result = flight_data.groupby(['from', 'to'], sort=False)['price per person ( EUR )'].mean().reset_index()
+    result = flight_data.groupby(['from', 'to'], sort=False)['price per person ( EUR )'].sum().reset_index()
     summary_value = flight_data['price per person ( EUR )'].sum()
-    summary_row = pd.DataFrame([['Summary', 'All Flights', summary_value]], columns=['from', 'to', 'price per person ( EUR )'])
-    result = pd.concat([summary_row, result], ignore_index=True)
+    st.metric(label="Average Price for All Flights", value=f"{summary_value:.2f} EUR")
     result.index = range(1, len(result) + 1)
     st.dataframe(result, use_container_width=True, hide_index=False)
 
