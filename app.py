@@ -121,7 +121,7 @@ with third_col1:
     flight_data = dataT[dataT['type of transport'] == 'flight']
     result = flight_data.groupby(['from', 'to'], sort=False)['price per person ( EUR )'].sum().reset_index()
     summary_value = flight_data['price per person ( EUR )'].sum()
-    st.metric(label="All Flights Per Person," value=f"{summary_value:.2f} €")
+    st.metric(label="All Flights Per Person", value=f"{summary_value:.2f} €")
     result.index = range(1, len(result) + 1)
     st.dataframe(result, use_container_width=True, hide_index=False)
 
