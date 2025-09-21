@@ -87,9 +87,9 @@ with bottom_col2:
 st.title("Flight Tickets")    
 
 third_col1, third_col2 = st.tabs(["list","vizual"])
-
+dataT = pd.read_csv("data_transport.csv")
 with third_col1:
   st.write("sem pridu data - flights")
-  
+  dataT.groupby(['from', 'to'])['price per person ( EUR )']
 with third_col2:
   st.write("sem pride vizual")
