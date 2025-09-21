@@ -167,7 +167,7 @@ with forth_col1:
   data = data.groupby(['country'])['nights']
   .sum()
   .reset_index()
-)
+  )
 result.index = range(1, len(result) + 1)
 st.dataframe(data, use_container_width=True, hide_index=False)
 
