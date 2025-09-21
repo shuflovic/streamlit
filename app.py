@@ -81,3 +81,13 @@ with bottom_col2:
         top_average_df = top_average_df.sort_values('average', ascending=False).head(5)
         top_average_df.columns = ['Country', 'Location', 'Accommodation', 'Average']
         st.dataframe(top_average_df.style.set_properties(**{'text-align': 'center'}), hide_index=True)
+
+        st.divider()
+    
+third_col1, third_col2 = st.tabs(["list","vizual"])
+
+with third_col1:
+  st.write("sem pridu data - flights")
+  
+with third_col2:
+  st.write("sem pride vizual")
