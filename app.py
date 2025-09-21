@@ -88,6 +88,7 @@ st.title("Flight Tickets")
 
 third_col1, third_col2 = st.tabs(["list","vizual"])
 dataT = pd.read_csv("data_transport.csv")
+dataT['price per person ( EUR )'] = data['average'].astype(str).str.replace('€', '').str.replace(',', '.').astype(float)
 
 with third_col1:
     st.write("Filtered Flight Data")
