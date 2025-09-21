@@ -86,9 +86,10 @@ with bottom_col2:
   
 st.title("Flight Tickets")    
 
-third_col1, third_col2 = st.tabs(["list","vizual"])
+third_col1, third_col2 = st.tabs(["list", "vizual"])
+
 dataT = pd.read_csv("data_transport.csv")
-dataT['price per person ( EUR )'] = data['average'].astype(str).str.replace('€', '').str.replace(',', '.').astype(float)
+dataT['price per person ( EUR )'] = dataT['average'].astype(str).str.replace('€', '').str.replace(',', '.').astype(float)
 
 with third_col1:
     st.write("Filtered Flight Data")
@@ -97,8 +98,8 @@ with third_col1:
     summary_value = flight_data['price per person ( EUR )'].mean()
     summary_row = pd.DataFrame([['Summary', 'All Flights', summary_value]], columns=['from', 'to', 'price per person ( EUR )'])
     result = pd.concat([summary_row, result], ignore_index=True)
-    result.index = result.index + 1
-    st.dataframe(result, use_container_width=True)
+    result.index = range(1, len(result) + 1)
+    st.dataframe(result, use_container_width=True, hide_index=False)
   
 with third_col2:
   st.write("sem pride vizual")
