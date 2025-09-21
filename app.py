@@ -166,12 +166,6 @@ forth_col1, forth_col2 = st.tabs(["list", "map"])
 st.title("visited countries")
 
 with forth_col1:
-  data = data.groupby(['country'])['nights']
-  .sum()
-  .reset_index()
- )
-result.index = range(1, len(result) + 1)
-st.dataframe(data, use_container_width=True, hide_index=False)
-
+    st.write("list")
 with forth_col2:
     st.write("map")
