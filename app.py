@@ -169,7 +169,7 @@ with forth_col1:
             .reset_index()
         )
     result.index = range(1, len(result) + 1)
-    st.dataframe(result, use_container_width=True, hide_index=False)
+    st.dataframe(data, use_container_width=True, hide_index=False)
 
 with forth_col2:
     st.write("map")
