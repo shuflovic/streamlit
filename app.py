@@ -118,7 +118,6 @@ dataT = pd.read_csv("data_transport.csv")
 dataT['price per person ( EUR )'] = dataT['price per person ( EUR )'].astype(str).str.replace('€', '').str.replace(',', '.').astype(float)
 
 with third_col1:
-    st.title("Flight Tickets")
     flight_data = dataT[dataT['type of transport'] == 'flight']
     result = flight_data.groupby(['from', 'to'], sort=False)['price per person ( EUR )'].sum().reset_index()
     summary_value = flight_data['price per person ( EUR )'].sum()
