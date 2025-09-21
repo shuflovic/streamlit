@@ -88,8 +88,12 @@ st.title("Flight Tickets")
 
 third_col1, third_col2 = st.tabs(["list","vizual"])
 dataT = pd.read_csv("data_transport.csv")
+
 with third_col1:
-  st.write("sem pridu data - flights")
-  dataT.groupby(['from', 'to'])['price per person ( EUR )']
+    st.write("Filtered Flight Data")
+    flight_data = dataT[dataT['type of transport'] == 'flight']
+    result = flight_data.groupby(['from', 'to'])['price per person ( EUR )'].mean().reset_index()
+    st.dataframe(result)
+  
 with third_col2:
   st.write("sem pride vizual")
