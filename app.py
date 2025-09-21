@@ -93,9 +93,9 @@ dataT['price per person ( EUR )'] = data['average'].astype(str).str.replace('€
 with third_col1:
     st.write("Filtered Flight Data")
     flight_data = dataT[dataT['type of transport'] == 'flight']
-    result = flight_data.groupby(['from', 'to'])['price per person ( EUR )'].mean().reset_index()
+    result = flight_data.groupby(['from', 'to'], sort=False)['price per person ( EUR )'].mean().reset_index()
     result.index = result.index + 1
-    st.dataframe(result)
+    st.dataframe(result, use_container_width=True)
   
 with third_col2:
   st.write("sem pride vizual")
