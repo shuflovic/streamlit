@@ -162,6 +162,7 @@ with third_col2:
     st_folium(m, width=700, height=500)
 
 forth_col1, forth_col2 = st.tabs(["list", "map"])
+st.title("visited countries")
 with forth_col1:
     data = data.groupby(['country'])['nights']
             .sum()
