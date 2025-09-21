@@ -158,4 +158,17 @@ with third_col2:
         if coords:
             m.fit_bounds(coords)
     # Render the map in Streamlit
+                                                                                                       
     st_folium(m, width=700, height=500)
+
+forth_col1, forth_col2 = st.tabs(["list", "map"])
+with forth_col1:
+    data = data.groupby(['country'])['nights']
+            .sum()
+            .reset_index()
+        )
+    result.index = range(1, len(result) + 1)
+    st.dataframe(result, use_container_width=True, hide_index=False)
+
+with forth_col2:
+    st.write("map")
