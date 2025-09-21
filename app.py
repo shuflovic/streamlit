@@ -161,9 +161,9 @@ with third_col2:
                                                                                                        
     st_folium(m, width=700, height=500)
 
-forth_col1, forth_col2 = st.tabs(["list", "map"])
-
 st.title("visited countries")
+
+forth_col1, forth_col2 = st.tabs(["list", "map"])
 
 with forth_col1:
     st.write("list")
