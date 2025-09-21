@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
+import folium
+from streamlit_folium import st_folium
 
 st.title("tam vonku - dashboard")
 
@@ -86,20 +88,75 @@ with bottom_col2:
   
 st.title("Flight Tickets")    
 
-third_col1, third_col2 = st.tabs(["list", "vizual"])
+city_coords = {
+    'vienna': (48.2082, 16.3738),
+    'abu dhabi': (24.4539, 54.3773),
+    'muscat': (23.5859, 58.4059),
+    'sharjah': (25.3463, 55.4209),
+    'colombo': (6.9271, 79.8612),
+    'budapest': (47.4979, 19.0402),
+    'stockholm': (59.3293, 18.0686),
+    'oslo': (59.9139, 10.7522),
+    'krakow': (50.0647, 19.9450),
+    'bratislava': (48.1486, 17.1077),
+    'sofia': (42.6977, 23.3219),
+    'istanbul': (41.0082, 28.9784),
+    'ulanbatar': (47.8864, 106.9057),
+    'soul': (37.5665, 126.9780),  # Assuming 'soul' is Seoul
+    'tokio': (35.6762, 139.6503),  # Assuming 'tokio' is Tokyo
+    'hong kong': (22.3193, 114.1694),
+    'ho chi minh': (10.8231, 106.6297),
+    'melbourne': (-37.8136, 144.9631),
+    'hobart': (-42.8821, 147.3272),
+    'launceston': (-41.4388, 147.1347),
+    'auckland': (-36.8485, 174.7633)
+}
 
+third_col1, third_col2 = st.tabs(["list", "vizual"])
 dataT = pd.read_csv("data_transport.csv")
-dataT['price per person ( EUR )'] = dataT['price per person ( EUR )'].astype(str).str.replace('€', '').str.replace(',', '.').astype(float)
+dataT['price per person ( EUR )'] = dataT['average'].astype(str).str.replace('€', '').str.replace(',', '.').astype(float)
 
 with third_col1:
     st.write("Filtered Flight Data")
     flight_data = dataT[dataT['type of transport'] == 'flight']
     result = flight_data.groupby(['from', 'to'], sort=False)['price per person ( EUR )'].mean().reset_index()
-    summary_value = flight_data['price per person ( EUR )'].sum()
+    summary_value = flight_data['price per person ( EUR )'].mean()
     summary_row = pd.DataFrame([['Summary', 'All Flights', summary_value]], columns=['from', 'to', 'price per person ( EUR )'])
     result = pd.concat([summary_row, result], ignore_index=True)
     result.index = range(1, len(result) + 1)
     st.dataframe(result, use_container_width=True, hide_index=False)
-  
+
 with third_col2:
-  st.write("sem pride vizual")
+    st.write("Visualization")
+    # Create a Folium map centered on the average of all coordinates
+    m = folium.Map(location=[0, 0], zoom_start=2)
+    # Add markers and lines for each flight route
+    for _, row in flight_data.iterrows():
+        origin = row['from'].lower().replace(' ', '')
+        destination = row['to'].lower().replace(' ', '')
+        if origin in city_coords and destination in city_coords:
+            # Add markers for origin and destination
+            folium.Marker(
+                location=city_coords[origin],
+                popup=f"{row['from']} ({row['price per person ( EUR )']:.2f} EUR)",
+                icon=folium.Icon(color='blue')
+            ).add_to(m)
+            folium.Marker(
+                location=city_coords[destination],
+                popup=f"{row['to']} ({row['price per person ( EUR )']:.2f} EUR)",
+                icon=folium.Icon(color='red')
+            ).add_to(m)
+            # Add a line connecting origin and destination
+            folium.PolyLine(
+                locations=[city_coords[origin], city_coords[destination]],
+                color='blue',
+                weight=2,
+                popup=f"{row['from']} to {row['to']}: {row['price per person ( EUR )']:.2f} EUR"
+            ).add_to(m)
+    # Adjust map to fit all markers
+    if not flight_data.empty:
+        coords = [city_coords[city.lower().replace(' ', '')] for city in set(flight_data['from']).union(set(flight_data['to'])) if city.lower().replace(' ', '') in city_coords]
+        if coords:
+            m.fit_bounds(coords)
+    # Render the map in Streamlit
+    st_folium(m, width=700, height=500)
