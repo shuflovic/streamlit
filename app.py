@@ -83,7 +83,9 @@ with bottom_col2:
         st.dataframe(top_average_df.style.set_properties(**{'text-align': 'center'}), hide_index=True)
 
         st.divider()
-    
+  
+st.title("Flight Tickets")    
+
 third_col1, third_col2 = st.tabs(["list","vizual"])
 
 with third_col1:
