@@ -90,7 +90,7 @@ st.title("Flight Tickets")
 
 city_coords = {
     'vienna': (48.2082, 16.3738),
-    'abu dhabi': (24.4539, 54.3773),
+    'abudhabi': (24.4539, 54.3773),
     'muscat': (23.5859, 58.4059),
     'sharjah': (25.3463, 55.4209),
     'colombo': (6.9271, 79.8612),
