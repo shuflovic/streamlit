@@ -174,7 +174,7 @@ with forth_col1:
         .sum()
         .reset_index()
     )
-    countries_df['nights'] = countries_df['nights'] / 2 * person
+    countries_df['nights'] = countries_df['nights'] / 2 * countries_df['person']
     countries_df.index = range(1, len(countries_df) + 1)
     st.dataframe(countries_df)
 with forth_col2:
