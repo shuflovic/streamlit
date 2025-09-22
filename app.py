@@ -5,7 +5,7 @@ import numpy as np
 import folium
 from streamlit_folium import st_folium
 import plotly.express as px
-from folium.features import MacroElement
+from branca.element import MacroElement  # Fixed import: from branca.element, not folium.features
 from jinja2 import Template
 
 st.title("tam vonku - dashboard")
@@ -182,7 +182,7 @@ with forth_col1:
     st.dataframe(countries_df)
 with forth_col2:
     st.write("map")
-    # Map country names to ISO-3 codes
+# Map country names to ISO-3 codes
     country_mapping = {
         'united arab emirates': 'ARE',
         'oman': 'OMN',
@@ -224,7 +224,7 @@ with forth_col2:
         data=countries_df,
         columns=['iso_code', 'nights'],
         key_on='feature.id',
-        fill_color='Reds',  # Changed to red color scheme
+        fill_color='Reds',  # Red color scheme
         fill_opacity=0.7,
         line_opacity=0.2,
         legend_name='Total Nights'
