@@ -3,5 +3,7 @@ pandas
 folium
 streamlit-folium
 plotly.express
-branca.element
+branca
 jinja2
+
+
