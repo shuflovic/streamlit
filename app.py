@@ -182,6 +182,6 @@ with forth_col1:
         </style>
     """, unsafe_allow_html=True)
   
-    st.dataframe(countries_df)
+    st.table(countries_df)
 with forth_col2:
     st.write("map")
