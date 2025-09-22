@@ -9,6 +9,8 @@ st.title("tam vonku - dashboard")
 
 data = pd.read_csv("data.csv")
 data['average'] = data['average'].astype(str).str.replace('€', '').str.replace(',', '.').astype(float)
+data['person'] = data['person'].astype(str).astype(int)
+
 
 st.write("Top 5 Accommodations (by Nights):")
 code1, code2 = st.tabs(["pie chart","table"])
