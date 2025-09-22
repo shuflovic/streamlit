@@ -180,7 +180,41 @@ with forth_col1:
     st.dataframe(countries_df)
 with forth_col2:
     st.write("map")
-# Map country names to ISO-3 codes for Folium (example mapping)
+# Map country names to ISO-3 codes
+    country_mapping = {
+        'united arab emirates': 'ARE',
+        'oman': 'OMN',
+        'sri lanka': 'LKA',
+        'hungary': 'HUN',
+        'austria': 'AUT',
+        'sweden': 'SWE',
+        'poland': 'POL',
+        'norway': 'NOR',
+        'slovakia': 'SVK',
+        'bulgaria': 'BGR',
+        'turkey': 'TUR',
+        'mongolia': 'MNG',
+        'south korea': 'KOR',
+        'japan': 'JPN',
+        'hong kong': 'HKG',
+        'china': 'CHN',
+        'vietnam': 'VNM',
+        'laos': 'LAO',
+        'australia': 'AUS',
+        'new zealand': 'NZL',
+        'french polynesia': 'PYF',
+        'usa': 'USA'
+    }
+    # Normalize country names to lowercase for consistency
+    countries_df['country'] = countries_df['country'].str.lower()
+    countries_df['iso_code'] = countries_df['country'].map(country_mapping)
+    
+    # Check for unmapped countries
+    unmapped = countries_df[countries_df['iso_code'].isna()]['country'].unique()
+    if len(unmapped) > 0:
+        st.warning(f"Unmapped countries: {', '.join(unmapped)}. Please check country names.")
+    
+    # Create a Folium choropleth map
     m = folium.Map(location=[0, 0], zoom_start=2)
     folium.Choropleth(
         geo_data='https://raw.githubusercontent.com/python-visualization/folium/main/examples/data/world-countries.json',
@@ -191,11 +225,9 @@ with forth_col2:
         fill_color='YlOrRd',
         fill_opacity=0.7,
         line_opacity=0.2,
-        legend_name='Total Nights',
-        nan_fill_color='gray',
-        nan_fill_opacity=0.4
+        legend_name='Total Nights'
     ).add_to(m)
     # Adjust map to fit all countries
     if not countries_df.empty:
-        m.fit_bounds([(-60, -180), (80, 180)])  # Broad bounds to include all listed countries
+        m.fit_bounds([(-60, -180), (80, 180)])  # Broad bounds for your countries
     st_folium(m, width=700, height=500)
