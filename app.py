@@ -181,7 +181,7 @@ with forth_col1:
 with forth_col2:
     st.write("map")
     # Create a choropleth map using Plotly Express
-    fig = px.choropleth(
+    fig4 = px.choropleth(
         countries_df,
         locations="country",
         locationmode="country names",
@@ -192,9 +192,9 @@ with forth_col2:
         labels={'nights': 'Total Nights'},
     )
     # Update layout for better appearance
-    fig.update_layout(
+    fig4.update_layout(
         geo=dict(showframe=False, showcoastlines=True, projection_type='equirectangular'),
         margin={"r":0, "t":50, "l":0, "b":0}
     )
     # Display the map in Streamlit
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig4, use_container_width=True)
