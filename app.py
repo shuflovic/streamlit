@@ -169,7 +169,7 @@ forth_col1, forth_col2 = st.tabs(["list", "map"])
 
 with forth_col1:
     st.write("list")
-    dataframe['nights'] = (dataframe['nights'] / 2) * dataframe['person']
+    data['nights'] = (data['nights'] / 2) * data['person']
     countries_df = (
         data.groupby(['country'], sort=False)['nights']
         .sum()
