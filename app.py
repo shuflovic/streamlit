@@ -180,7 +180,51 @@ with forth_col1:
     st.dataframe(countries_df)
 with forth_col2:
     st.write("map")
-# Map country names to ISO-3 codes
+    m = folium.Map(location=[0, 0], zoom_start=2)
+    for _, row in flight_data.iterrows():
+        origin = row['from'].lower().replace(' ', '')
+        destination = row['to'].lower().replace(' ', '')
+        if origin in city_coords and destination in city_coords:
+            folium.Marker(
+                location=city_coords[origin],
+                popup=f"{row['from']} ({row['price per person ( EUR )']:.2f} EUR)",
+                icon=folium.Icon(color='blue')
+            ).add_to(m)
+            folium.Marker(
+                location=city_coords[destination],
+                popup=f"{row['to']} ({row['price per person ( EUR )']:.2f} EUR)",
+                icon=folium.Icon(color='red')
+            ).add_to(m)
+            folium.PolyLine(
+                locations=[city_coords[origin], city_coords[destination]],
+                color='blue',
+                weight=2,
+                popup=f"{row['from']} to {row['to']}: {row['price per person ( EUR )']:.2f} EUR"
+            ).add_to(m)
+    if not flight_data.empty:
+        coords = [city_coords[city.lower().replace(' ', '')] for city in set(flight_data['from']).union(set(flight_data['to'])) if city.lower().replace(' ', '') in city_coords]
+        if coords:
+            m.fit_bounds(coords)
+    st_folium(m, width=700, height=500)
+
+st.title("visited countries")
+forth_col1, forth_col2 = st.tabs(["list", "map"])
+
+with forth_col1:
+    st.write("list")
+    data['person'] = pd.to_numeric(data['person'], errors='coerce').fillna(1).astype(int)
+    data['nights'] = (data['nights'] / 2) * data['person']
+    countries_df = (
+        data.groupby(['country'], sort=False)['nights']
+        .sum()
+        .reset_index()
+    )
+    countries_df.index = range(1, len(countries_df) + 1)
+    st.dataframe(countries_df)
+
+with forth_col2:
+    st.write("map")
+    # Map country names to ISO-3 codes
     country_mapping = {
         'united arab emirates': 'ARE',
         'oman': 'OMN',
@@ -222,11 +266,37 @@ with forth_col2:
         data=countries_df,
         columns=['iso_code', 'nights'],
         key_on='feature.id',
-        fill_color='YlOrRd',
+        fill_color='Reds',  # Changed to red color scheme
         fill_opacity=0.7,
         line_opacity=0.2,
         legend_name='Total Nights'
     ).add_to(m)
+    
+    # Add custom legend with Country - Nights
+    legend_html = """
+    {% macro html %}
+    <div style="position: fixed; 
+                top: 50px; right: 50px; 
+                width: 200px; 
+                background-color: white; 
+                border: 2px solid grey; 
+                z-index: 9999; 
+                font-size: 14px; 
+                padding: 10px;">
+        <b>Country - Nights</b><br>
+        {% for country, nights in countries %}
+        {{ country|title }}: {{ nights|round(2) }}<br>
+        {% endfor %}
+    </div>
+    {% endmacro %}
+    """
+    countries_data = [(row['country'], row['nights']) for _, row in countries_df.iterrows()]
+    legend_template = Template(legend_html)
+    legend = MacroElement()
+    legend._template = legend_template
+    legend.countries = countries_data
+    m.get_root().add_child(legend)
+    
     # Adjust map to fit all countries
     if not countries_df.empty:
         m.fit_bounds([(-60, -180), (80, 180)])  # Broad bounds for your countries
