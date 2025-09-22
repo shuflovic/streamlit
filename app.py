@@ -180,21 +180,22 @@ with forth_col1:
     st.dataframe(countries_df)
 with forth_col2:
     st.write("map")
-    # Create a choropleth map using Plotly Express
-    fig4 = px.choropleth(
-        countries_df,
-        locations="country",
-        locationmode="country names",
-        color="nights",
-        hover_name="country",
-        color_continuous_scale=px.colors.sequential.Plasma,
-        title="Total Nights by Country",
-        labels={'nights': 'Total Nights'},
-    )
-    # Update layout for better appearance
-    fig4.update_layout(
-        geo=dict(showframe=False, showcoastlines=True, projection_type='equirectangular'),
-        margin={"r":0, "t":50, "l":0, "b":0}
-    )
-    # Display the map in Streamlit
-    st.plotly_chart(fig4, use_container_width=True)
+# Map country names to ISO-3 codes for Folium (example mapping)
+    m = folium.Map(location=[0, 0], zoom_start=2)
+    folium.Choropleth(
+        geo_data='https://raw.githubusercontent.com/python-visualization/folium/main/examples/data/world-countries.json',
+        name='choropleth',
+        data=countries_df,
+        columns=['iso_code', 'nights'],
+        key_on='feature.id',
+        fill_color='YlOrRd',
+        fill_opacity=0.7,
+        line_opacity=0.2,
+        legend_name='Total Nights',
+        nan_fill_color='gray',
+        nan_fill_opacity=0.4
+    ).add_to(m)
+    # Adjust map to fit all countries
+    if not countries_df.empty:
+        m.fit_bounds([(-60, -180), (80, 180)])  # Broad bounds to include all listed countries
+    st_folium(m, width=700, height=500)
