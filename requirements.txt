@@ -2,3 +2,4 @@ matplotlib
 pandas
 folium
 streamlit-folium
+plotly.express
