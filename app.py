@@ -5,6 +5,8 @@ import numpy as np
 import folium
 from streamlit_folium import st_folium
 import plotly.express as px
+from folium.features import MacroElement
+from jinja2 import Template
 
 st.title("tam vonku - dashboard")
 
