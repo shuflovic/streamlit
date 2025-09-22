@@ -244,7 +244,7 @@ with forth_col2:
         {}
     </div>
     """
-    legend_items = ''.join([f"{row['country'].title()}: {row['nights']:.2f}<br>" for _, row in countries_df.iterrows()])
+    legend_items = ''.join([f"{row['country'].title()}: {row['nights']}<br>" for _, row in countries_df.iterrows()])
     m.get_root().html.add_child(folium.Element(legend_html.format(legend_items)))
     
     # Adjust map to fit all countries
