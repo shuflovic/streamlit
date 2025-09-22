@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import folium
 from streamlit_folium import st_folium
-import plotly.express as ps
+import plotly.express as px
 
 st.title("tam vonku - dashboard")
 
