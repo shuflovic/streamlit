@@ -168,7 +168,7 @@ forth_col1, forth_col2 = st.tabs(["list", "map"])
 with forth_col1:
     st.write("list")
     countries_df = (
-            data.groupby(['country'])['nights']
+            data.groupby(['country'], sort=False)['nights']
             .sum()
             .reset_index()
         )
