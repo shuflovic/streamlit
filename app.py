@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import folium
 from streamlit_folium import st_folium
+import plotly.express as ps
 
 st.title("tam vonku - dashboard")
 
@@ -179,3 +180,21 @@ with forth_col1:
     st.dataframe(countries_df)
 with forth_col2:
     st.write("map")
+    # Create a choropleth map using Plotly Express
+    fig = px.choropleth(
+        countries_df,
+        locations="country",
+        locationmode="country names",
+        color="nights",
+        hover_name="country",
+        color_continuous_scale=px.colors.sequential.Plasma,
+        title="Total Nights by Country",
+        labels={'nights': 'Total Nights'},
+    )
+    # Update layout for better appearance
+    fig.update_layout(
+        geo=dict(showframe=False, showcoastlines=True, projection_type='equirectangular'),
+        margin={"r":0, "t":50, "l":0, "b":0}
+    )
+    # Display the map in Streamlit
+    st.plotly_chart(fig, use_container_width=True)
