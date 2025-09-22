@@ -180,50 +180,6 @@ with forth_col1:
     st.dataframe(countries_df)
 with forth_col2:
     st.write("map")
-    m = folium.Map(location=[0, 0], zoom_start=2)
-    for _, row in flight_data.iterrows():
-        origin = row['from'].lower().replace(' ', '')
-        destination = row['to'].lower().replace(' ', '')
-        if origin in city_coords and destination in city_coords:
-            folium.Marker(
-                location=city_coords[origin],
-                popup=f"{row['from']} ({row['price per person ( EUR )']:.2f} EUR)",
-                icon=folium.Icon(color='blue')
-            ).add_to(m)
-            folium.Marker(
-                location=city_coords[destination],
-                popup=f"{row['to']} ({row['price per person ( EUR )']:.2f} EUR)",
-                icon=folium.Icon(color='red')
-            ).add_to(m)
-            folium.PolyLine(
-                locations=[city_coords[origin], city_coords[destination]],
-                color='blue',
-                weight=2,
-                popup=f"{row['from']} to {row['to']}: {row['price per person ( EUR )']:.2f} EUR"
-            ).add_to(m)
-    if not flight_data.empty:
-        coords = [city_coords[city.lower().replace(' ', '')] for city in set(flight_data['from']).union(set(flight_data['to'])) if city.lower().replace(' ', '') in city_coords]
-        if coords:
-            m.fit_bounds(coords)
-    st_folium(m, width=700, height=500)
-
-st.title("visited countries")
-forth_col1, forth_col2 = st.tabs(["list", "map"])
-
-with forth_col1:
-    st.write("list")
-    data['person'] = pd.to_numeric(data['person'], errors='coerce').fillna(1).astype(int)
-    data['nights'] = (data['nights'] / 2) * data['person']
-    countries_df = (
-        data.groupby(['country'], sort=False)['nights']
-        .sum()
-        .reset_index()
-    )
-    countries_df.index = range(1, len(countries_df) + 1)
-    st.dataframe(countries_df)
-
-with forth_col2:
-    st.write("map")
     # Map country names to ISO-3 codes
     country_mapping = {
         'united arab emirates': 'ARE',
