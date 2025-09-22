@@ -182,7 +182,7 @@ with forth_col1:
     st.dataframe(countries_df)
 with forth_col2:
     st.write("map")
-# Map country names to ISO-3 codes
+    # Map country names to ISO-3 codes
     country_mapping = {
         'united arab emirates': 'ARE',
         'oman': 'OMN',
@@ -232,7 +232,6 @@ with forth_col2:
     
     # Add custom legend with Country - Nights
     legend_html = """
-    {% macro html %}
     <div style="position: fixed; 
                 top: 50px; right: 50px; 
                 width: 200px; 
@@ -242,18 +241,11 @@ with forth_col2:
                 font-size: 14px; 
                 padding: 10px;">
         <b>Country - Nights</b><br>
-        {% for country, nights in countries %}
-        {{ country|title }}: {{ nights|round(2) }}<br>
-        {% endfor %}
+        {}
     </div>
-    {% endmacro %}
     """
-    countries_data = [(row['country'], row['nights']) for _, row in countries_df.iterrows()]
-    legend_template = Template(legend_html)
-    legend = MacroElement()
-    legend._template = legend_template
-    legend.countries = countries_data
-    m.get_root().add_child(legend)
+    legend_items = ''.join([f"{row['country'].title()}: {row['nights']:.2f}<br>" for _, row in countries_df.iterrows()])
+    m.get_root().html.add_child(folium.Element(legend_html.format(legend_items)))
     
     # Adjust map to fit all countries
     if not countries_df.empty:
