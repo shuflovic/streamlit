@@ -176,12 +176,12 @@ with forth_col1:
   
     st.markdown("""
         <style>
-        table {
+        .stDataFrame [data-testid="stTable"] {
             text-align: center;
         }
         </style>
     """, unsafe_allow_html=True)
   
-    st.table(countries_df)
+    st.dataframe(countries_df)
 with forth_col2:
     st.write("map")
