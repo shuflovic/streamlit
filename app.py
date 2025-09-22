@@ -168,14 +168,14 @@ st.title("visited countries")
 forth_col1, forth_col2 = st.tabs(["list", "map"])
 
 with forth_col1:
-  st.write("list")
-  dafaframe['nights'] = dataframe['nights'] / 2 * dataframe["person"]
-  countries_df = ("
-    data.groupby(['country'], sort=False)['nights']
-    .sum()
-    .reset_index()
-  )
-countries_df.index = range(1, len(countries_df) + 1)
-st.dataframe(countries_df)
+    st.write("list")
+    countries_df = (
+        data.groupby(['country'], sort=False)['nights']
+        .sum()
+        .reset_index()
+    )
+    countries_df['nights'] = countries_df['nights'] / 2 * person
+    countries_df.index = range(1, len(countries_df) + 1)
+    st.dataframe(countries_df)
 with forth_col2:
     st.write("map")
