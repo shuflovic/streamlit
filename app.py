@@ -173,6 +173,15 @@ with forth_col1:
             .reset_index()
         )
     countries_df.index = range(1, len(countries_df) + 1)
+  
+    st.markdown("""
+        <style>
+        table {
+            text-align: center;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+  
     st.dataframe(countries_df)
 with forth_col2:
     st.write("map")
