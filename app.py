@@ -172,6 +172,7 @@ with forth_col1:
             .sum()
             .reset_index()
         )
+    countries_df.index = range(1, len(result) + 1)
     st.dataframe(countries_df)
 with forth_col2:
     st.write("map")
