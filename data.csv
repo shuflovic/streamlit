@@ -38,7 +38,7 @@ id,country,location,platform,check in,check out,nights,total price of stay,perso
 37,sweden,storuman,Airbnb,17.08.2024,19.08.2024,2,"107,92",2,"26,98",naturnara
 38,sweden,kungsleden,wild camping,19.08.2024,24.08.2024,5,"0,00",2,"0,00",kungsleden
 39,sweden,bieverholmen,cabin,24.08.2024,26.08.2024,2,"114,34",2,"28,59",kungsleden
-40,sweden,jackvikk,hostel,26.08.2024,27.08.2024,1,"73,88",2,"36,94",kungsleden
+40,sweden,jackvikk,hostel,26.08.2024,27.08.2024,1,"73,88",2,"36,94",hostel_jackvik
 41,sweden,kungsleden,wild camping,27.08.2024,29.08.2024,2,"0,00",2,"0,00",kungsleden
 42,sweden,kungsleden,emergency hut,29.08.2024,30.08.2024,1,"0,00",2,"0,00",kungsleden
 43,sweden,kungsleden,wild camping,30.08.2024,06.09.2024,7,"0,00",2,"0,00",kungsleden
@@ -124,6 +124,7 @@ id,country,location,platform,check in,check out,nights,total price of stay,perso
 120,australia,melbourne to auckland,flight,03.09.2025,04.09.2025,1,0,2,"0,00",night flight auckland
 121,new zealand,new plymouth,booking.com,04.09.2025,05.09.2025,1,"40,23",2,"20,12",ariki hostel
 122,new zealand,new plymouth,workaway,05.09.2025,27.09.2025,22,0,2,"0,00",dee
+
 
 
 
