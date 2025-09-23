@@ -191,7 +191,7 @@ with forth_col2:
         'Workaway': data[data['platform'] == 'workaway']['nights'].sum(),
         'kungsleden': data[data['location'] == 'kungsleden']['nights'].sum(),
         'paid accommodation': data[data['platform'].str.contains('booking|stf|airbnb|trip.com', case=False, na=False, regex=True)]['nights'].sum(),
-        'other': data[data['other'].str.contains('airport|plane|train|flight|transfer', case=False, na=False, regex=True)]['nights'].sum()
+        'other': data[data['platform'].str.contains('airport|plane|train|flight|transfer', case=False, na=False, regex=True)]['nights'].sum()
     }
     # Filter out activities with 0 days for cleaner display
     activity_days = {k: v for k, v in activity_days.items() if v > 0}
