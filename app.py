@@ -189,7 +189,7 @@ with forth_col2:
     activity_days = {
         'Treeplanting': data[data['platform'] == 'treeplanting']['nights'].sum(),
         'Workaway': data[data['platform'] == 'workaway']['nights'].sum(),
-        'Wild Camping': data[data['platform'] == 'wild camping']['nights'].sum(),
+        'Wild Camping': data[data['location'] == 'kungsleden']['nights'].sum(),
         'Vipassana': data[data['platform'] == 'vipassana']['nights'].sum(),
         'Transport': data[data['accommodation'].str.contains('airport|plane|train|flight|transfer', case=False, na=False, regex=True)]['nights'].sum()
     }
