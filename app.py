@@ -34,6 +34,7 @@ with code1:
             labels=top_5_combinations.index.map(lambda x: f"{x[0]} \n({x[1]})"),
             autopct=lambda pct: nights_formatter(pct, top_5_combinations.values),
             pctdistance=0.7,
+            hole=0.4,
             textprops={'fontsize': 14} # FIX: Increase font size for readability
         )
         ax.axis('equal')
