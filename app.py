@@ -28,8 +28,8 @@ with code1:
                 return f"{absolute_nights}"
         
             # Pie chart for nights
-            fig, ax = plt.subplots()
-            ax.pie(
+        fig, ax = plt.subplots()
+        ax.pie(
                 top_5_combinations.values,   # FIX: use values, not Series
                 labels=top_5_combinations.index.map(lambda x: f"{x[0]} \n({x[1]})"),
                 autopct=lambda pct: nights_formatter(pct, top_5_combinations.values),
@@ -37,8 +37,8 @@ with code1:
                 hole=0.4,
                 textprops={'fontsize': 14} # FIX: Increase font size for readability
             )
-            ax.axis('equal')
-            st.pyplot(fig)
+        ax.axis('equal')
+        st.pyplot(fig)
                                   
 with code2:
         top_accommodations_df = (
