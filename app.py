@@ -187,11 +187,11 @@ with forth_col2:
     # --- Days by Type of Activity (Workaway, Treeplanting, Wild Camping) ---
     st.markdown("### Days by Activity Type")
     activity_days = {
-        'Treeplanting': data[data['platform'] == 'treeplanting']['nights'].sum(),
+        'treeplanting': data[data['platform'] == 'treeplanting']['nights'].sum(),
         'Workaway': data[data['platform'] == 'workaway']['nights'].sum(),
-        'Wild Camping': data[data['location'] == 'kungsleden']['nights'].sum(),
+        'kungsleden': data[data['location'] == 'kungsleden']['nights'].sum(),
         'Vipassana': data[data['platform'] == 'vipassana']['nights'].sum(),
-        'Transport': data[data['accommodation'].str.contains('airport|plane|train|flight|transfer', case=False, na=False, regex=True)]['nights'].sum()
+        'other': data[data['accommodation'].str.contains('airport|plane|train|flight|transfer', case=False, na=False, regex=True)]['nights'].sum()
     }
     # Filter out activities with 0 days for cleaner display
     activity_days = {k: v for k, v in activity_days.items() if v > 0}
