@@ -182,4 +182,27 @@ with forth_col1:
     st.dataframe(countries_df)
 with forth_col2:
     st.write("map")
+    
+    st.subheader("Type Of Stay Breakdown")
+    # --- Days by Type of Activity (Workaway, Treeplanting, Wild Camping) ---
+    st.markdown("### Days by Activity Type")
+    activity_days = {
+        'Treeplanting': filtered_df[filtered_df['platform'] == 'treeplanting']['calculated_nights'].sum(),
+        'Workaway': filtered_df[filtered_df['platform'] == 'workaway']['calculated_nights'].sum(),
+        'Wild Camping': filtered_df[filtered_df['platform'] == 'wild camping']['calculated_nights'].sum(),
+        'Vipassana': filtered_df[filtered_df['platform'] == 'vipassana']['calculated_nights'].sum(),
+        'Transport': filtered_df[filtered_df['accommodation'].str.contains('airport|plane|train|flight|transfer', case=False, na=False, regex=True)]['calculated_nights'].sum()
+    }
+    # Filter out activities with 0 days for cleaner display
+    activity_days = {k: v for k, v in activity_days.items() if v > 0}
+
+    if activity_days:
+        activity_df = pd.DataFrame(activity_days.items(), columns=['Activity', 'Days'])
+        fig_activities = px.pie(activity_df, values='Days', names='Activity',
+                                title='Days Spent on Specific Activities',
+                                hole=0.4,
+                                color_discrete_sequence=px.colors.qualitative.Pastel)
+        st.plotly_chart(fig_activities, use_container_width=True)
+    else:
+        st.write("No specific activity days recorded for the current filters.")
 
