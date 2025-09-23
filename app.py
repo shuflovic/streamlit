@@ -187,11 +187,11 @@ with forth_col2:
     # --- Days by Type of Activity (Workaway, Treeplanting, Wild Camping) ---
     st.markdown("### Days by Activity Type")
     activity_days = {
-        'Treeplanting': filtered_df[filtered_df['platform'] == 'treeplanting']['calculated_nights'].sum(),
-        'Workaway': filtered_df[filtered_df['platform'] == 'workaway']['calculated_nights'].sum(),
-        'Wild Camping': filtered_df[filtered_df['platform'] == 'wild camping']['calculated_nights'].sum(),
-        'Vipassana': filtered_df[filtered_df['platform'] == 'vipassana']['calculated_nights'].sum(),
-        'Transport': filtered_df[filtered_df['accommodation'].str.contains('airport|plane|train|flight|transfer', case=False, na=False, regex=True)]['calculated_nights'].sum()
+        'Treeplanting': filtered_df[filtered_df['platform'] == 'treeplanting']['nights'].sum(),
+        'Workaway': filtered_df[filtered_df['platform'] == 'workaway']['nights'].sum(),
+        'Wild Camping': filtered_df[filtered_df['platform'] == 'wild camping']['nights'].sum(),
+        'Vipassana': filtered_df[filtered_df['platform'] == 'vipassana']['nights'].sum(),
+        'Transport': filtered_df[filtered_df['accommodation'].str.contains('airport|plane|train|flight|transfer', case=False, na=False, regex=True)]['nights'].sum()
     }
     # Filter out activities with 0 days for cleaner display
     activity_days = {k: v for k, v in activity_days.items() if v > 0}
