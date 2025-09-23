@@ -24,19 +24,19 @@ with code1:
     
         # Formatter for nights
         def nights_formatter(pct, allvals):
-                absolute_nights = round(pct / 100.0 * sum(allvals))
-                return f"{absolute_nights}"
+            absolute_nights = round(pct / 100.0 * sum(allvals))
+            return f"{absolute_nights}"
         
             # Pie chart for nights
         fig, ax = plt.subplots()
         ax.pie(
-                top_5_combinations.values,   # FIX: use values, not Series
-                labels=top_5_combinations.index.map(lambda x: f"{x[0]} \n({x[1]})"),
-                autopct=lambda pct: nights_formatter(pct, top_5_combinations.values),
-                pctdistance=0.7,
-                hole=0.4,
-                textprops={'fontsize': 14} # FIX: Increase font size for readability
-            )
+            top_5_combinations.values,   # FIX: use values, not Series
+            labels=top_5_combinations.index.map(lambda x: f"{x[0]} \n({x[1]})"),
+            autopct=lambda pct: nights_formatter(pct, top_5_combinations.values),
+            pctdistance=0.7,
+            hole=0.4,
+            textprops={'fontsize': 14} # FIX: Increase font size for readability
+        )
         ax.axis('equal')
         st.pyplot(fig)
                                   
