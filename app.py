@@ -183,7 +183,9 @@ with forth_col1:
 with forth_col2:
     st.write("map")
 
-st.subheader("Type Of Stay Breakdown")
+st.divider()
+
+st.title("Type Of Stay Breakdown")
 activity_days = {
       'treeplanting': data[data['platform'] == 'treeplanting']['nights'].sum(),
       'workaway': data[data['platform'] == 'workaway']['nights'].sum(),
