@@ -185,7 +185,7 @@ with forth_col2:
 
 st.divider()
 
-st.title("Type Of Stay Breakdown")
+st.title("Type Of Stay - Breakdown")
 activity_days = {
       'treeplanting': data[data['platform'] == 'treeplanting']['nights'].sum(),
       'workaway': data[data['platform'] == 'workaway']['nights'].sum(),
@@ -203,7 +203,7 @@ if activity_days:
           activity_df,
           values='Days',
           names='Activity_with_Days',  # Use the new column with activity and days
-          title='Days Spent on Specific Activities',
+          title='% Of Days Spent on Specific Activities',
           hole=0.4,
           color_discrete_sequence=px.colors.qualitative.Pastel
       )
