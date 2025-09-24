@@ -195,7 +195,7 @@ with forth_col2:
       
     if activity_days:
           activity_df = pd.DataFrame(activity_days.items(), columns=['Activity', 'Days'])
-          activity_df['Activity_with_Days'] = activity_df.apply(lambda row: f"{row['Activity']} ({int(row['Days'])} nights)", axis=1)
+          activity_df['Activity_with_Days'] = activity_df.apply(lambda row: f"{row['Activity']} - {int(row['Days'])} nights", axis=1)
           
           fig_activities = px.pie(
               activity_df,
