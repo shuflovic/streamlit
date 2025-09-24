@@ -184,14 +184,13 @@ with forth_col2:
     st.write("map")
     
     st.subheader("Type Of Stay Breakdown")
-    # --- Days by Type of Activity (Workaway, Treeplanting, Wild Camping) ---
-    st.markdown("### Days by Activity Type")
+
     activity_days = {
         'treeplanting': data[data['platform'] == 'treeplanting']['nights'].sum(),
-        'Workaway': data[data['platform'] == 'workaway']['nights'].sum(),
+        'workaway': data[data['platform'] == 'workaway']['nights'].sum(),
         'kungsleden': data[data['platform'] == 'kungsleden']['nights'].sum(),
-        'paid accommodation': data[data['platform'].str.contains('booking|stf|airbnb|trip.com', case=False, na=False, regex=True)]['nights'].sum(),
-        'other': data[data['platform'].str.contains('airport|plane|train|flight|transfer', case=False, na=False, regex=True)]['nights'].sum()
+        'paid accommodation': data[data['platform'].str.contains('booking|stf|irbnb|trip.com', case=False, na=False, regex=True)]['nights'].sum(),
+        'other': data[data['platform'].str.contains('airport|plane|train|flight|transfer|home|nitra|chata', case=False, na=False, regex=True)]['nights'].sum()
     }
     # Filter out activities with 0 days for cleaner display
     activity_days = {k: v for k, v in activity_days.items() if v > 0}
