@@ -183,28 +183,28 @@ with forth_col1:
 with forth_col2:
     st.write("map")
 
-    st.subheader("Type Of Stay Breakdown")
-    activity_days = {
-          'treeplanting': data[data['platform'] == 'treeplanting']['nights'].sum(),
-          'workaway': data[data['platform'] == 'workaway']['nights'].sum(),
-          'kungsleden': data[data['platform'] == 'kungsleden']['nights'].sum(),
-          'paid accommodation': data[data['platform'].str.contains('booking|stf|irbnb|trip.com|random|on the spot', case=False, na=False, regex=True)]['nights'].sum(),
-          'other(transfers, vipassana, home, ..)': data[data['platform'].str.contains('airport|transport|plane|train|flight|transfer|home|nitra|friend|vipassana', case=False, na=False, regex=True)]['nights'].sum()
-      }
-    activity_days = {k: v for k, v in activity_days.items() if v > 0}
+st.subheader("Type Of Stay Breakdown")
+activity_days = {
+      'treeplanting': data[data['platform'] == 'treeplanting']['nights'].sum(),
+      'workaway': data[data['platform'] == 'workaway']['nights'].sum(),
+      'kungsleden': data[data['platform'] == 'kungsleden']['nights'].sum(),
+      'paid accommodation': data[data['platform'].str.contains('booking|stf|irbnb|trip.com|random|on the spot', case=False, na=False, regex=True)]['nights'].sum(),
+      'other(transfers, vipassana, home, ..)': data[data['platform'].str.contains('airport|transport|plane|train|flight|transfer|home|nitra|friend|vipassana', case=False, na=False, regex=True)]['nights'].sum()
+  }
+activity_days = {k: v for k, v in activity_days.items() if v > 0}
+  
+if activity_days:
+      activity_df = pd.DataFrame(activity_days.items(), columns=['Activity', 'Days'])
+      activity_df['Activity_with_Days'] = activity_df.apply(lambda row: f"{row['Activity']} - {int(row['Days'])} nights", axis=1)
       
-    if activity_days:
-          activity_df = pd.DataFrame(activity_days.items(), columns=['Activity', 'Days'])
-          activity_df['Activity_with_Days'] = activity_df.apply(lambda row: f"{row['Activity']} - {int(row['Days'])} nights", axis=1)
-          
-          fig_activities = px.pie(
-              activity_df,
-              values='Days',
-              names='Activity_with_Days',  # Use the new column with activity and days
-              title='Days Spent on Specific Activities',
-              hole=0.4,
-              color_discrete_sequence=px.colors.qualitative.Pastel
-          )
-          st.plotly_chart(fig_activities, use_container_width=True)
-    else:
-          st.write("No specific activity days recorded for the current filters.")
+      fig_activities = px.pie(
+          activity_df,
+          values='Days',
+          names='Activity_with_Days',  # Use the new column with activity and days
+          title='Days Spent on Specific Activities',
+          hole=0.4,
+          color_discrete_sequence=px.colors.qualitative.Pastel
+      )
+      st.plotly_chart(fig_activities, use_container_width=True)
+else:
+      st.write("No specific activity days recorded for the current filters.")
