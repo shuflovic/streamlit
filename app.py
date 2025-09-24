@@ -188,7 +188,7 @@ with forth_col2:
           'treeplanting': data[data['platform'] == 'treeplanting']['nights'].sum(),
           'workaway': data[data['platform'] == 'workaway']['nights'].sum(),
           'kungsleden': data[data['platform'] == 'kungsleden']['nights'].sum(),
-          'paid accommodation': data[data['platform'].str.contains('booking|stf|irbnb|trip.com', case=False, na=False, regex=True)]['nights'].sum(),
+          'paid accommodation': data[data['platform'].str.contains('booking|stf|irbnb|trip.com|random|on the spot', case=False, na=False, regex=True)]['nights'].sum(),
           'other': data[data['platform'].str.contains('airport|transport|plane|train|flight|transfer|home|nitra|friend|vipassana', case=False, na=False, regex=True)]['nights'].sum()
       }
     activity_days = {k: v for k, v in activity_days.items() if v > 0}
