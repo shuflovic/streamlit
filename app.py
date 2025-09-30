@@ -91,11 +91,6 @@ with bottom_col2:
 
         st.divider()
   
-import streamlit as st
-import pandas as pd
-import folium
-from streamlit_folium import st_folium
-
 st.title("Flight Tickets")
 
 # Define city coordinates
@@ -144,43 +139,56 @@ with third_col1:
 
 with third_col2:
     st.write("Flight Route Visualization")
-    # Create a Folium map centered near the zero time zone
-    m = folium.Map(location=[0, 0], zoom_start=2, tiles="CartoDB Positron")
+    # Create a Folium map centered on the world
+    m = folium.Map(location=[20, 0], zoom_start=2, tiles="CartoDB Positron")
 
-    # Track coordinates for map bounds
     all_coords = []
     flight_count = 0
 
-    # Function to split PolyLine if crossing antimeridian
+    # Function to adjust line if crossing the antimeridian
     def adjust_for_antimeridian(coord1, coord2):
         lat1, lon1 = coord1
         lat2, lon2 = coord2
-        if (lon1 * lon2 < 0) and abs(lon1 - lon2) > 180:
-            # Split at 0° longitude
-            mid_lon = 0
-            mid_lat = lat1 + (lat2 - lat1) * abs(mid_lon - lon1) / abs(lon2 - lon1)
-            return [(lat1, lon1), (mid_lat, mid_lon), (lat2, lon2)]
+
+        # Normalize longitudes to [-180, 180]
+        if lon1 > 180: lon1 -= 360
+        if lon2 > 180: lon2 -= 360
+        if lon1 < -180: lon1 += 360
+        if lon2 < -180: lon2 += 360
+
+        # Check if crossing ±180° longitude
+        if abs(lon1 - lon2) > 180:
+            # Shift longitudes so the line wraps correctly
+            if lon1 > 0:
+                lon1 -= 360
+            else:
+                lon2 -= 360
+
         return [(lat1, lon1), (lat2, lon2)]
 
-    # Add markers and lines for each flight route
+    # Add markers and routes
     for _, row in flight_data.iterrows():
         origin = row['from'].lower().replace(' ', '')
         destination = row['to'].lower().replace(' ', '')
+
         if origin in city_coords and destination in city_coords:
             flight_count += 1
-            # Add origin marker (blue)
+
+            # Add origin marker
             folium.Marker(
                 location=city_coords[origin],
                 popup=f"{row['from']} ({row['price per person ( EUR )']:.2f} EUR)",
                 icon=folium.Icon(color='blue', icon='plane-departure', prefix='fa')
             ).add_to(m)
-            # Add destination marker (red)
+
+            # Add destination marker
             folium.Marker(
                 location=city_coords[destination],
                 popup=f"{row['to']} ({row['price per person ( EUR )']:.2f} EUR)",
                 icon=folium.Icon(color='red', icon='plane-arrival', prefix='fa')
             ).add_to(m)
-            # Add a PolyLine with antimeridian adjustment
+
+            # Draw line, adjusted for antimeridian
             coords = adjust_for_antimeridian(city_coords[origin], city_coords[destination])
             folium.PolyLine(
                 locations=coords,
@@ -189,22 +197,20 @@ with third_col2:
                 opacity=0.6,
                 popup=f"{row['from']} to {row['to']}: {row['price per person ( EUR )']:.2f} EUR"
             ).add_to(m)
-            # Collect coordinates for bounds
+
             all_coords.extend(coords)
         else:
             st.warning(f"Skipping flight from {row['from']} to {row['to']}: City not found in coordinates.")
 
-    # Adjust map to fit all markers if there are valid coordinates
+    # Adjust map bounds
     if all_coords:
         m.fit_bounds(all_coords)
     else:
         st.error("No valid flight routes to display. Check city names in data_transport.csv.")
 
-    # Display total number of flights
     st.write(f"Total flights displayed: {flight_count}")
-
-    # Render the map in Streamlit
     st_folium(m, width=700, height=500)
+
 
 
 st.title("visited countries")
