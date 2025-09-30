@@ -218,8 +218,8 @@ for _, row in flight_data.iterrows():
 
         all_coords.extend(coords)
 
-        else:
-            st.warning(f"Skipping flight from {row['from']} to {row['to']}: City not found in coordinates.")
+        #else:
+         #   st.warning(f"Skipping flight from {row['from']} to {row['to']}: City not found in coordinates.")
 
     # Adjust map bounds
     if all_coords:
