@@ -91,8 +91,11 @@ with bottom_col2:
 
         st.divider()
   
-st.title("Flight Tickets")    
 
+
+st.title("Flight Tickets")
+
+# Define city coordinates
 city_coords = {
     'vienna': (48.2082, 16.3738),
     'abudhabi': (24.4539, 54.3773),
@@ -115,13 +118,16 @@ city_coords = {
     'hobart': (-42.8821, 147.3272),
     'launceston': (-41.4388, 147.1347),
     'auckland': (-36.8485, 174.7633),
-    'tahiti': (-17.6509, -149.4260),  # Added Tahiti (Papeete, French Polynesia)
-    'sanfrancisco': (37.7749, -122.4194),  # Added San Francisco
-    'lisbon': (38.7223, -9.1393),  # Added Lisbon
-    'barcelona': (41.3851, 2.1734)  # Added Barcelona
+    'tahiti': (-17.6509, -149.4260),
+    'sanfrancisco': (37.7749, -122.4194),
+    'lisbon': (38.7223, -9.1393),
+    'barcelona': (41.3851, 2.1734)
 }
 
-third_col1, third_col2 = st.tabs(["list", "vizual"])
+# Create tabs for list and visualization
+third_col1, third_col2 = st.tabs(["List", "Visualization"])
+
+# Load and process flight data
 dataT = pd.read_csv("data_transport.csv")
 dataT['price per person ( EUR )'] = dataT['price per person ( EUR )'].astype(str).str.replace('€', '').str.replace(',', '.').astype(float)
 
@@ -134,41 +140,56 @@ with third_col1:
     st.dataframe(result, use_container_width=True, hide_index=False)
 
 with third_col2:
-    st.write("Visualization")
-    # Create a Folium map centered on the average of all coordinates
-    m = folium.Map(location=[0, 0], zoom_start=2)
+    st.write("Flight Route Visualization")
+    # Create a Folium map centered on the world
+    m = folium.Map(location=[0, 0], zoom_start=2, tiles="CartoDB Positron")
+
+    # Track coordinates for map bounds
+    all_coords = []
+    flight_count = 0
+
     # Add markers and lines for each flight route
     for _, row in flight_data.iterrows():
         origin = row['from'].lower().replace(' ', '')
         destination = row['to'].lower().replace(' ', '')
         if origin in city_coords and destination in city_coords:
-            # Add markers for origin and destination
+            flight_count += 1
+            # Add origin marker (blue)
             folium.Marker(
                 location=city_coords[origin],
                 popup=f"{row['from']} ({row['price per person ( EUR )']:.2f} EUR)",
-                icon=folium.Icon(color='blue')
+                icon=folium.Icon(color='blue', icon='plane-departure', prefix='fa')
             ).add_to(m)
+            # Add destination marker (red)
             folium.Marker(
                 location=city_coords[destination],
                 popup=f"{row['to']} ({row['price per person ( EUR )']:.2f} EUR)",
-                icon=folium.Icon(color='red')
+                icon=folium.Icon(color='red', icon='plane-arrival', prefix='fa')
             ).add_to(m)
             # Add a line connecting origin and destination
             folium.PolyLine(
                 locations=[city_coords[origin], city_coords[destination]],
                 color='blue',
                 weight=2,
+                opacity=0.6,
                 popup=f"{row['from']} to {row['to']}: {row['price per person ( EUR )']:.2f} EUR"
             ).add_to(m)
-    # Adjust map to fit all markers
-    if not flight_data.empty:
-        coords = [city_coords[city.lower().replace(' ', '')] for city in set(flight_data['from']).union(set(flight_data['to'])) if city.lower().replace(' ', '') in city_coords]
-        if coords:
-            m.fit_bounds(coords)
-    # Render the map in Streamlit
-                                                                                                       
-    st_folium(m, width=700, height=500)
+            # Collect coordinates for bounds
+            all_coords.extend([city_coords[origin], city_coords[destination]])
+        else:
+            st.warning(f"Skipping flight from {row['from']} to {row['to']}: City not found in coordinates.")
 
+    # Adjust map to fit all markers if there are valid coordinates
+    if all_coords:
+        m.fit_bounds(all_coords)
+    else:
+        st.error("No valid flight routes to display. Check city names in data_transport.csv.")
+
+    # Display total number of flights
+    st.write(f"Total flights displayed: {flight_count}")
+
+    # Render the map in Streamlit
+    st_folium(m, width=700, height=500)
 st.title("visited countries")
 
 forth_col1, forth_col2 = st.tabs(["list", "map"])
