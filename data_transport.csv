@@ -37,9 +37,9 @@ id,date,from,to,type of transport,"price per person ( EUR )"
 36,29.10.2024,istanbul,ulanbatar,flight,231.50
 37,12.11.2024,ulanbatar,khakhorin,bus,10.40
 38,14.11.2024,khakhorin,ulanbatar,bus,10.40
-39,21.11.2024,ulanbatar,soul,flight,151.50
-40,18.12.2024,soul,tokio,flight,85.98
-41,18.03.2025,tokio,hong kong,flight,116.5
+39,21.11.2024,ulanbatar,seoul,flight,151.50
+40,18.12.2024,seoul,tokyo,flight,85.98
+41,18.03.2025,tokyo,hong kong,flight,116.5
 42,06.04.2025,shenzhen,haikou,train,52.5
 43,20.04.2025,mong cai,haiphong,bus,6.74
 44,23.04.2025,haiphong,hanoi,bus,4.38
@@ -53,4 +53,5 @@ id,date,from,to,type of transport,"price per person ( EUR )"
 52,29.11.2025,lisbon,barcelona,flight,38.5
 53,01.12.2025,barcelona,bratislava,flight,36.89
 54,11.12.2025,Krakow,Oslo,flight,22.22
+
 
