@@ -107,16 +107,19 @@ city_coords = {
     'sofia': (42.6977, 23.3219),
     'istanbul': (41.0082, 28.9784),
     'ulanbatar': (47.8864, 106.9057),
-    'seoul': (37.5665, 126.9780),  # Corrected 'soul' to 'seoul'
-    'tokyo': (35.6762, 139.6503),  # Corrected 'tokio' to 'tokyo'
-    'hongkong': (22.3193, 114.1694),  # Normalized 'hong kong' to 'hongkong'
-    'hochiminh': (10.8231, 106.6297),  # Normalized 'ho chi minh' to 'hochiminh'
+    'seoul': (37.5665, 126.9780),
+    'tokyo': (35.6762, 139.6503),
+    'hongkong': (22.3193, 114.1694),
+    'hochiminh': (10.8231, 106.6297),
     'melbourne': (-37.8136, 144.9631),
     'hobart': (-42.8821, 147.3272),
     'launceston': (-41.4388, 147.1347),
-    'auckland': (-36.8485, 174.7633)
+    'auckland': (-36.8485, 174.7633),
+    'tahiti': (-17.6509, -149.4260),  # Added Tahiti (Papeete, French Polynesia)
+    'sanfrancisco': (37.7749, -122.4194),  # Added San Francisco
+    'lisbon': (38.7223, -9.1393),  # Added Lisbon
+    'barcelona': (41.3851, 2.1734)  # Added Barcelona
 }
-
 
 third_col1, third_col2 = st.tabs(["list", "vizual"])
 dataT = pd.read_csv("data_transport.csv")
