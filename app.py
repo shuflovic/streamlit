@@ -91,7 +91,10 @@ with bottom_col2:
 
         st.divider()
   
-
+import streamlit as st
+import pandas as pd
+import folium
+from streamlit_folium import st_folium
 
 st.title("Flight Tickets")
 
@@ -141,12 +144,23 @@ with third_col1:
 
 with third_col2:
     st.write("Flight Route Visualization")
-    # Create a Folium map centered on the world
+    # Create a Folium map centered near the zero time zone
     m = folium.Map(location=[0, 0], zoom_start=2, tiles="CartoDB Positron")
 
     # Track coordinates for map bounds
     all_coords = []
     flight_count = 0
+
+    # Function to split PolyLine if crossing antimeridian
+    def adjust_for_antimeridian(coord1, coord2):
+        lat1, lon1 = coord1
+        lat2, lon2 = coord2
+        if (lon1 * lon2 < 0) and abs(lon1 - lon2) > 180:
+            # Split at 0° longitude
+            mid_lon = 0
+            mid_lat = lat1 + (lat2 - lat1) * abs(mid_lon - lon1) / abs(lon2 - lon1)
+            return [(lat1, lon1), (mid_lat, mid_lon), (lat2, lon2)]
+        return [(lat1, lon1), (lat2, lon2)]
 
     # Add markers and lines for each flight route
     for _, row in flight_data.iterrows():
@@ -166,16 +180,17 @@ with third_col2:
                 popup=f"{row['to']} ({row['price per person ( EUR )']:.2f} EUR)",
                 icon=folium.Icon(color='red', icon='plane-arrival', prefix='fa')
             ).add_to(m)
-            # Add a line connecting origin and destination
+            # Add a PolyLine with antimeridian adjustment
+            coords = adjust_for_antimeridian(city_coords[origin], city_coords[destination])
             folium.PolyLine(
-                locations=[city_coords[origin], city_coords[destination]],
+                locations=coords,
                 color='blue',
                 weight=2,
                 opacity=0.6,
                 popup=f"{row['from']} to {row['to']}: {row['price per person ( EUR )']:.2f} EUR"
             ).add_to(m)
             # Collect coordinates for bounds
-            all_coords.extend([city_coords[origin], city_coords[destination]])
+            all_coords.extend(coords)
         else:
             st.warning(f"Skipping flight from {row['from']} to {row['to']}: City not found in coordinates.")
 
@@ -190,6 +205,8 @@ with third_col2:
 
     # Render the map in Streamlit
     st_folium(m, width=700, height=500)
+
+
 st.title("visited countries")
 
 forth_col1, forth_col2 = st.tabs(["list", "map"])
