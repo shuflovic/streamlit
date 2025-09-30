@@ -166,34 +166,30 @@ with third_col2:
 
         return [(lat1, lon1), (lat2, lon2)]
 
-# Keep track of drawn routes to detect duplicates
-drawn_routes = set()
+    # Add markers and routes
+    for _, row in flight_data.iterrows():
+        origin = row['from'].lower().replace(' ', '')
+        destination = row['to'].lower().replace(' ', '')
 
-# Add markers and lines for each flight route
-for _, row in flight_data.iterrows():
-    origin = row['from'].lower().replace(' ', '')
-    destination = row['to'].lower().replace(' ', '')
+        if origin in city_coords and destination in city_coords:
+            flight_count += 1
 
-    if origin in city_coords and destination in city_coords:
-        flight_count += 1
-
-        # Get adjusted coordinates
-        coords = adjust_for_antimeridian(city_coords[origin], city_coords[destination])
-
-        # Create a unique key for this route (ignoring direction)
-        route_key = tuple(sorted([origin, destination]))
-
-        # If we already drew the reverse direction → make this one dashed
-        if route_key in drawn_routes:
-            folium.PolyLine(
-                locations=coords,
-                color='blue',
-                weight=2,
-                opacity=0.6,
-                popup=f"{row['from']} to {row['to']}: {row['price per person ( EUR )']:.2f} EUR",
-                dash_array="5,5"  # dashed line for return flight
+            # Add origin marker
+            folium.Marker(
+                location=city_coords[origin],
+                popup=f"{row['from']} ({row['price per person ( EUR )']:.2f} EUR)",
+                icon=folium.Icon(color='blue', icon='plane-departure', prefix='fa')
             ).add_to(m)
-        else:
+
+            # Add destination marker
+            folium.Marker(
+                location=city_coords[destination],
+                popup=f"{row['to']} ({row['price per person ( EUR )']:.2f} EUR)",
+                icon=folium.Icon(color='red', icon='plane-arrival', prefix='fa')
+            ).add_to(m)
+
+            # Draw line, adjusted for antimeridian
+            coords = adjust_for_antimeridian(city_coords[origin], city_coords[destination])
             folium.PolyLine(
                 locations=coords,
                 color='blue',
@@ -201,25 +197,10 @@ for _, row in flight_data.iterrows():
                 opacity=0.6,
                 popup=f"{row['from']} to {row['to']}: {row['price per person ( EUR )']:.2f} EUR"
             ).add_to(m)
-            drawn_routes.add(route_key)
 
-        # Add markers
-        folium.Marker(
-            location=city_coords[origin],
-            popup=f"{row['from']} ({row['price per person ( EUR )']:.2f} EUR)",
-            icon=folium.Icon(color='blue', icon='plane-departure', prefix='fa')
-        ).add_to(m)
-
-        folium.Marker(
-            location=city_coords[destination],
-            popup=f"{row['to']} ({row['price per person ( EUR )']:.2f} EUR)",
-            icon=folium.Icon(color='red', icon='plane-arrival', prefix='fa')
-        ).add_to(m)
-
-        all_coords.extend(coords)
-
-        #else:
-         #   st.warning(f"Skipping flight from {row['from']} to {row['to']}: City not found in coordinates.")
+            all_coords.extend(coords)
+        else:
+            st.warning(f"Skipping flight from {row['from']} to {row['to']}: City not found in coordinates.")
 
     # Adjust map bounds
     if all_coords:
@@ -229,8 +210,6 @@ for _, row in flight_data.iterrows():
 
     st.write(f"Total flights displayed: {flight_count}")
     st_folium(m, width=700, height=500)
-
-
 
 st.title("visited countries")
 
