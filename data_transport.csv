@@ -1,4 +1,4 @@
-id,date,from,to,type of transport,price
+id,date,from,to,type of transport,"price per person ( EUR )"
 1,28.01.2024,bratislava,vienna airport,bus,9.90
 2,28.01.2024,vienna,abu dhabi,flight,49.58
 3,28.01.2024,abu dhabi airport,abu dhabi center,bus,0.90
@@ -53,3 +53,4 @@ id,date,from,to,type of transport,price
 52,29.11.2025,lisbon,barcelona,flight,38.5
 53,01.12.2025,barcelona,bratislava,flight,36.89
 54,11.12.2025,Krakow,Oslo,flight,22.22
+
