@@ -52,6 +52,8 @@ id,date,from,to,type of transport,"price per person ( EUR )"
 51,28.11.2025,san francisco,lisbon,flight,140
 52,29.11.2025,lisbon,barcelona,flight,38.5
 53,01.12.2025,barcelona,bratislava,flight,36.89
-54,11.12.2025,Krakow,Oslo,flight,22.22
+54,11.12.2025,krakow,oslo,flight,22.22
+55,26.12.2025,oslo,bratislava,flight,32.22
+
 
 
