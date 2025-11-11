@@ -126,15 +126,16 @@ id,country,location,platform,check in,check out,nights,total price of stay,perso
 122,new zealand,new plymouth,workaway,05.09.2025,27.09.2025,22,0,2,"0,00",dee
 123,new zealand,wellington,workaway,27.09.2025,16.10.2025,19,0,2,"0,00",rachael
 
-124,new zealand,tararua,hiking,16.10.2025,17.10.2025,1,"9,83",2,"4,92",mitre flats hut
-125,new zealand,tararua,hiking,17.10.2025,18.10.2025,1,"9,83",2,"4,92",tarn ridge hut
-126,new zealand,tararua,hiking,18.10.2025,19.10.2025,1,"9,83",2,"4,92",te matawai hut
+124,new zealand,tararua,D.O.C. hut,16.10.2025,17.10.2025,1,"9,83",2,"4,92",mitre flats hut
+125,new zealand,tararua,D.O.C. hut,17.10.2025,18.10.2025,1,"9,83",2,"4,92",tarn ridge hut
+126,new zealand,tararua,D.O.C. hut,18.10.2025,19.10.2025,1,"9,83",2,"4,92",te matawai hut
 
 127,new zealand,wellington,workaway,19.10.2025,25.10.2025,6,0,2,"0,00",rachael
 
 128,new zealand,auckland,booking.com,25.10.2025,27.10.2025,2,72,2,"18",backpackers choice
 129,new zealand,goat island,workaway,27.10.2025,6.11.2025,10,0,2,"0,00",rachael & craig
 130,new zealand,auckland,workaway,6.11.2025,19.11.2025,13,0,2,"0,00",danielle/monique
+
 
 
 
