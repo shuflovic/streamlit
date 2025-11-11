@@ -124,7 +124,15 @@ id,country,location,platform,check in,check out,nights,total price of stay,perso
 120,australia,melbourne to auckland,flight,03.09.2025,04.09.2025,1,0,2,"0,00",night flight auckland
 121,new zealand,new plymouth,booking.com,04.09.2025,05.09.2025,1,"40,23",2,"20,12",ariki hostel
 122,new zealand,new plymouth,workaway,05.09.2025,27.09.2025,22,0,2,"0,00",dee
-123,new zealand,wellington,workaway,27.09.2025,11.10.2025,14,0,2,"0,00",rachael
+123,new zealand,wellington,workaway,27.09.2025,16.10.2025,19,0,2,"0,00",rachael
+
+124,new zealand,tararua,hiking,16.10.2025,17.10.2025,1,"9,83",2,"4,92",mitre flats hut
+125,new zealand,tararua,hiking,17.10.2025,18.10.2025,1,"9,83",2,"4,92",tarn ridge hut
+126,new zealand,tararua,hiking,18.10.2025,19.10.2025,1,"9,83",2,"4,92",te matawai hut
+
+127,new zealand,wellington,workaway,19.10.2025,25.10.2025,6,0,2,"0,00",rachael
+
+
 
 
 
