@@ -10,7 +10,7 @@ from jinja2 import Template
 
 st.title("tam vonku - dashboard")
 
-data = pd.read_csv("data.csv")
+data = pd.read_csv(r"c:\Users\pavel\streamlit\streamlit\data.csv")
 data['average'] = data['average'].astype(str).str.replace('€', '').str.replace(',', '.').astype(float)
 data['person'] = data['person'].astype(str).astype(int)
 
@@ -126,7 +126,7 @@ city_coords = {
 third_col1, third_col2 = st.tabs(["List", "Visualization"])
 
 # Load and process flight data
-dataT = pd.read_csv("data_transport.csv")
+dataT = pd.read_csv(r"c:\Users\pavel\streamlit\streamlit\data_transport.csv")
 dataT['price per person ( EUR )'] = dataT['price per person ( EUR )'].astype(str).str.replace('€', '').str.replace(',', '.').astype(float)
 
 with third_col1:
