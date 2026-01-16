@@ -126,7 +126,7 @@ city_coords = {
 third_col1, third_col2 = st.tabs(["List", "Visualization"])
 
 # Load and process flight data
-dataT = pd.read_csv(r"c:\Users\pavel\streamlit\streamlit\data_transport.csv")
+dataT = pd.read_csv("data_transport.csv")
 dataT['price per person ( EUR )'] = dataT['price per person ( EUR )'].astype(str).str.replace('€', '').str.replace(',', '.').astype(float)
 
 with third_col1:
