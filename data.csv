@@ -142,14 +142,15 @@ id,country,location,platform,check in,check out,nights,total price of stay,perso
 132,New Zealand,auckland,workaway,14.11.2025,16.11.2025,2,0,1,0,monique
 133,New Zealand,auckland,workaway,16.11.2025,18.11.2025,2,0,2,0,monique
 134,New Zealand,auckland,booking.com,18.11.2025,19.11.2025,1,37,2,18.5,oceanic hostel
-135,French Polynesia,papeete,Airbnb,18.11.2025,24.11.2025,6,2,26.9575,tahiti holiday concierge,323.49
-136,French Polynesia,papeete to auckland,plane,24.11.2025,25.11.2025,1,2,0,night flight to san francisco,0
-137,USA,san francisco,booking.com,25.11.2025,28.11.2025,3,2,28.733333333333334,hotel north beach,172.4
-138,USA,san francisco to lisbon,plane,28.11.2025,29.11.2025,1,2,0,night flight to lisbon,0
-139,Spain,barcelona,Airbnb,29.11.2025,01.12.2025,2,2,22.605,room in center,90.42
-140,Slovakia,bratislava,home sweet home,01.12.2025,10.12.2025,9,2,0,home sweet home,0
-141,Czechia,ostrava,booking.com,10.12.2025,11.12.2025,1,2,17.915,hotel rada,35.83          
-142,Sweden,tvallen,workaway,11.12.2025,26.12.2025,15,2,0,tvallen lake,0
+135,French Polynesia,papeete,Airbnb,18.11.2025,24.11.2025,6,323.49,2,26.9575,tahiti holiday concierge
+136,French Polynesia,papeete to auckland,plane,24.11.2025,25.11.2025,1,0,2,0,night flight to san francisco
+137,USA,san francisco,booking.com,25.11.2025,28.11.2025,3,172.40,2,28.73,hotel north beach
+138,USA,san francisco to lisbon,plane,28.11.2025,29.11.2025,1,0,2,0,night flight to lisbon
+139,Spain,barcelona,Airbnb,29.11.2025,01.12.2025,2,90.42,2,22.605,room in center
+140,Slovakia,bratislava,home sweet home,01.12.2025,10.12.2025,9,0,2,0,home sweet home
+141,Czechia,ostrava,booking.com,10.12.2025,11.12.2025,1,35.83,2,17.915,hotel rada        
+142,Sweden,tvallen,workaway,11.12.2025,26.12.2025,15,0,2,0,tvallen lake
+
 
 
 
