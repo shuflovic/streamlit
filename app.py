@@ -10,7 +10,7 @@ from jinja2 import Template
 
 st.title("tam vonku - dashboard")
 
-data = pd.read_csv(r"c:\Users\pavel\streamlit\streamlit\data.csv")
+data = pd.read_csv("data.csv")
 data['average'] = data['average'].astype(str).str.replace('€', '').str.replace(',', '.').astype(float)
 data['person'] = data['person'].astype(str).astype(int)
 
