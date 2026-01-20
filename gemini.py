@@ -67,7 +67,15 @@ with col1:
     
     # Display the table
   
-    st.dataframe(visited_df.style.set_properties(**{'text-align': 'center'}), use_container_width=True)
+    st.data_editor(
+    visited_df, 
+    use_container_width=True, 
+    hide_index=True, 
+    column_config={
+        "Country": st.column_config.TextColumn(alignment="center"),
+        "Nights Spent": st.column_config.NumberColumn(alignment="center")
+    }
+)
 
 with col2:
     st.subheader("Column 2")
