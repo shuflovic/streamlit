@@ -66,7 +66,8 @@ with col1:
     visited_df.columns = ["Country", "Nights Spent"]
     
     # Display the table
-    st.dataframe(visited_df, use_container_width=True)
+  
+    st.dataframe(visited_df.style.set_properties(**{'text-align': 'center'}), use_container_width=True)
 
 with col2:
     st.subheader("Column 2")
