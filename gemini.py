@@ -11,7 +11,7 @@ st.set_page_config(
 if 'dark_mode' not in st.session_state:
     st.session_state.dark_mode = True
 
-theme_toggle = st.toggle("🌙 Dark Mode", value=st.session_state.dark_mode)
+theme_toggle = st.toggle("", value=st.session_state.dark_mode)
 
 # 3. CSS INJECTION BASED ON TOGGLE
 if theme_toggle:
