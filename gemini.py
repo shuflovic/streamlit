@@ -1,5 +1,5 @@
 import streamlit as st
-import pandas as pd  # New import for data
+import pandas as pd
 
 # 1. PAGE SETUP
 st.set_page_config(
@@ -27,12 +27,19 @@ st.markdown(f"""
     </style>
     """, unsafe_allow_html=True)
 
-# --- NEW: DATA LOADING SECTION ---
-# Make sure 'data.csv' is in the same folder as gemini.py
-@st.cache_data # This makes the app faster by not reloading the file every time
+# --- DATA LOADING SECTION ---
+@st.cache_data
 def load_data():
     df = pd.read_csv("data.csv")
-    df['country'] = df['country'].str.title() # Make sure countries look nice
+    
+    # Clean data types
+    df['country'] = df['country'].str.title()
+    df['person'] = pd.to_numeric(df['person'], errors='coerce').fillna(1)
+    df['nights'] = pd.to_numeric(df['nights'], errors='coerce').fillna(0)
+    
+    # NEW CALCULATION: Total nights = nights / 2 * person
+    df['calculated_nights'] = (df['nights'] / 2) * df['person']
+    
     return df
 
 data = load_data()
@@ -47,18 +54,15 @@ col1, col2, col3 = st.columns(3)
 with col1:
     st.subheader("🌍 Visited Countries")
     
-    # Process the data for the table
-    # We group by country and sum up the nights
-    visited_df = data.groupby('country')['nights'].sum().reset_index()
+    # Group by country using our new 'calculated_nights' column
+    visited_df = data.groupby('country')['calculated_nights'].sum().reset_index()
     
-    # Sort by nights (most visited first)
-    visited_df = visited_df.sort_values('nights', ascending=False)
-    
-    # Reset index to start from 1 for the table
+    # Sort and prepare table
+    visited_df = visited_df.sort_values('calculated_nights', ascending=False)
     visited_df.index = range(1, len(visited_df) + 1)
     visited_df.index.name = "Index"
     
-    # Rename columns as requested
+    # Rename for display
     visited_df.columns = ["Country", "Nights Spent"]
     
     # Display the table
@@ -66,12 +70,12 @@ with col1:
 
 with col2:
     st.subheader("Column 2")
-    st.write("Here comes **Price per Person**.")
+    st.write("Ready for the next set of data.")
     st.info("Empty Data Slot 2")
 
 with col3:
     st.subheader("Column 3")
-    st.write("Here comes **Activity Breakdown**.")
+    st.write("Ready for the next set of data.")
     st.info("Empty Data Slot 3")
 
 st.divider()
