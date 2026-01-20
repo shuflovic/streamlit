@@ -38,7 +38,7 @@ def load_data():
     df['nights'] = pd.to_numeric(df['nights'], errors='coerce').fillna(0)
     
     # NEW CALCULATION: Total nights = nights / 2 * person
-    df['calculated_nights'] = (df['nights'] / 2) * df['person']
+    df['calculated_nights'] = ((df['nights'] / 2) * df['person']).astype(int)
     
     return df
 
