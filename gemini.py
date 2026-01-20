@@ -11,7 +11,7 @@ st.set_page_config(
 if 'dark_mode' not in st.session_state:
     st.session_state.dark_mode = True
 
-theme_toggle = st.toggle("", value=st.session_state.dark_mode)
+theme_toggle = st.toggle(st.write(f"Current mode: {'Dark' if theme_toggle else 'Light'}"), value=st.session_state.dark_mode)
 
 # 3. CSS INJECTION BASED ON TOGGLE
 if theme_toggle:
@@ -44,7 +44,6 @@ st.markdown(f"""
 
 # 4. HEADER
 st.title("tam vonku - dashboard")
-st.write(f"Current mode: {'Dark' if theme_toggle else 'Light'}")
 st.divider()
 
 # 5. THREE COLUMN LAYOUT
